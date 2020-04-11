@@ -241,20 +241,35 @@
 
                         result.innerHTML = finalTranscripts + '<span style="color: #999">' + interimTranscripts +
                             '</span>';
+                        if ("speechSynthesis" in window) {
+
+                            let textEl = "hello boss";
+                            let text = textEl.innerText;
+                            let msg = new SpeechSynthesisUtterance();
+                            msg.lang = navigator.language ? navigator.language : 'en';
+                            msg.rate = 1;
+                            msg.text = text;
+                            speechSynthesis.speak(msg);
+                            setTimeout(function () {
+                                textEl.focus();
+                            }, 0);
 
 
-                    }
-                    finalTranscripts = '';
-                    result.innerHTML = '';
-                };
-                speechRecognizer.onerror = function (event) {
 
-                };
-            } else {
-                result.innerHTML =
-                    'Your browser is not supported. Please download Google chrome or Update your Google chrome!!';
+
+
+                        }
+                        finalTranscripts = '';
+                        result.innerHTML = '';
+                    };
+                    speechRecognizer.onerror = function (event) {
+
+                    };
+                } else {
+                    result.innerHTML =
+                        'Your browser is not supported. Please download Google chrome or Update your Google chrome!!';
+                }
             }
-        }
     </script>
 </body>
 
