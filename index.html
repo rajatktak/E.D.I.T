@@ -7,9 +7,13 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+            html,
             body {
-                background-color: #2d2e30;
+                margin: 0;
+                overflow: hidden;
+                background: #000;
             }
+
 
             h1,
             h3,
@@ -30,30 +34,28 @@
                 border-width: 1px;
             }
 
-            BUTTON {
+            #bbttnn {
                 z-index: 1;
-                background-color: #00ffff;
-                border: none;
-                color: white;
-                padding: 15px 32px;
-                position: relative;
+                border-radius: 50%;
+                display: block;
                 text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
+                justify-content: center;
+                float: center;
                 -moz-transition-duration: 0.4s;
                 -webkit-transition-duration: 0.4s;
                 -o-transition-duration: 0.4s;
                 cursor: pointer;
-                /*border-radius: 12px;*/
-                float: center;
+                left: 40%;
+
+
             }
 
-            BUTTON:hover {
-                background-color: black;
-                color: #00ffff;
-                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            #bbttnn:hover {
+                transition: 2s;
+                transform-origin: top;
+
+                box-shadow: 0 17px 40px 0 rgba(0, 225, 225, 0.6);
+
             }
 
             input[type=text] {
@@ -259,22 +261,191 @@
                 text-decoration: none;
                 cursor: pointer;
             }
+
+            .overlay {
+                top: 15;
+                position: absolute;
+                z-index: 11;
+                cursor: pointer;
+            }
+
+            #bbttnn {
+                position: absolute;
+                top: 15;
+                display: block;
+                border-radius: 50%;
+                z-index: 5555555;
+                background: rgba(0, 0, 0, 1);
+                -moz-box-shadow: inset 0 0 10px cyan;
+                -webkit-box-shadow: inset 0 0 10px #bbb;
+                box-shadow: inset 0 0 10px cyan;
+                -ms-animation: blinking-inner-glow 2s infinite;
+                -o-animation: blinking-inner-glow 2s infinite;
+                -webkit-animation: blinking-inner-glow 2s infinite;
+                -moz-animation: blinking-inner-glow 2s infinite;
+                animation: blinking-inner-glow 2s infinite;
+                transition: 2s;
+
+            }
         </style>
+
     </head>
 
 
-    <body>
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
-        </div>
+    <body onload=" PressButton()">
+        <audio id="myAudio">
+            <source src="sss.ogg" type="audio/ogg">
+            <source src="sss.mp3" type="audio/mpeg">
 
+        </audio>
+        <canvas id="cccaa" style="height:100vh;"></canvas>
+        <script>
+            let hexagon_radius = 50;
+            let hexagon_max_absolute_speed = 0.1;
+            let hexagon_space_between = 2;
+            let hexagon_line_width = 1;
+            var hexagon_color = 'rgba(0,225,225,0.6)';
+
+
+
+            let ccc, ccttxx;
+
+            let hexagons = [];
+
+            let s3p3 = Math.sqrt(3);
+
+            function init() {
+
+                ccc = document.getElementById('cccaa');
+                ccc.width = window.innerWidth;
+                ccc.height = window.innerHeight;
+                ccc.style.width = ccc.width + 'px';
+                ccc.style.height = ccc.height + 'px';
+                ccttxx = ccc.getContext('2d');
+
+                ccttxx.globalCompositeOperation = "source-over";
+
+                let hw = Math.ceil(ccc.width / (1.5 * hexagon_radius + hexagon_space_between * 2)) + 1;
+                let hh = Math.ceil(ccc.height / (s3p3 * hexagon_radius + hexagon_space_between * 2)) + 1;
+
+                for (let x = 0; x < hw; x++)
+                    for (let y = 0; y < hh; y++)
+                        addHexagon(
+                            hexagon_radius + hexagon_space_between + (1.5 * hexagon_radius + hexagon_space_between *
+                                2) * x,
+                            s3p3 * hexagon_radius / 2 + hexagon_space_between + (s3p3 * hexagon_radius +
+                                hexagon_space_between * 2) * y - (x % 2 ? s3p3 * hexagon_radius / 2 : 0), {
+                                l: 0
+                            }
+                        );
+
+                ccttxx.lineWidth = hexagon_line_width;
+
+                looo();
+
+            }
+
+            function looo() {
+                requestAnimFrame(looo);
+
+                ccttxx.clearRect(0, 0, ccc.width, ccc.height);
+                ccttxx.fillStyle = 'black';
+                ccttxx.fillRect(0, 0, ccc.width, ccc.height);
+
+                ccttxx.beginPath();
+
+                for (let i = 0; i < hexagons.length; i++)
+                    drawHexagonPath(i);
+
+                ccttxx.shadowColor = hexagon_color;
+                ccttxx.shadowBlur = 20;
+                ccttxx.strokeStyle = hexagon_color;
+                ccttxx.stroke();
+
+            }
+
+            function addHexagon(x, y, opts) {
+                let l = Math.floor(Math.random() * 6),
+                    p = Math.random();
+
+                if (!opts) opts = {};
+
+                hexagons.push({
+                    sl: opts.l || opts.l === 0 ? opts.l : l,
+                    p: opts.p || opts.p === 0 ? opts.p : p,
+                    x: x,
+                    y: y,
+                    speed: opts.speed || opts.speed === 0 ? opts.speed : (Math.random() *
+                        hexagon_max_absolute_speed * 2 - hexagon_max_absolute_speed)
+                });
+            }
+
+            function drawHexagonPath(hex_index) {
+
+                let hex = hexagons[hex_index];
+
+
+
+                ccttxx.moveTo(
+                    hex.x + Math.cos(Math.PI / 3 * hex.sl) * hexagon_radius + Math.cos(Math.PI / 3 * (hex.sl + 2)) *
+                    hexagon_radius * hex.p,
+                    hex.y + Math.sin(Math.PI / 3 * hex.sl) * hexagon_radius + Math.sin(Math.PI / 3 * (hex.sl + 2)) *
+                    hexagon_radius * hex.p
+                );
+
+                //ccttxx.moveTo(hex.x, hex.y);
+
+                ccttxx.lineTo(
+                    hex.x + Math.cos(Math.PI / 3 * (hex.sl + 1)) * hexagon_radius,
+                    hex.y + Math.sin(Math.PI / 3 * (hex.sl + 1)) * hexagon_radius
+                );
+
+                ccttxx.lineTo(
+                    hex.x + Math.cos(Math.PI / 3 * (hex.sl + 2)) * hexagon_radius,
+                    hex.y + Math.sin(Math.PI / 3 * (hex.sl + 2)) * hexagon_radius
+                );
+
+                ccttxx.lineTo(
+                    hex.x + Math.cos(Math.PI / 3 * (hex.sl + 3)) * hexagon_radius,
+                    hex.y + Math.sin(Math.PI / 3 * (hex.sl + 3)) * hexagon_radius
+                );
+
+                ccttxx.lineTo(
+                    hex.x + Math.cos(Math.PI / 3 * (hex.sl + 3)) * hexagon_radius + Math.cos(Math.PI / 3 * (hex.sl +
+                        5)) * hexagon_radius * hex.p,
+                    hex.y + Math.sin(Math.PI / 3 * (hex.sl + 3)) * hexagon_radius + Math.sin(Math.PI / 3 * (hex.sl +
+                        5)) * hexagon_radius * hex.p
+                );
+
+                hex.p += hex.speed;
+                if (hex.p > 1 || hex.p < 0) {
+                    hex.p = hex.speed < 0 ? 1 : 0;
+                    hex.sl += hex.speed < 0 ? -1 : 1;
+                    hex.sl = hex.sl % 6;
+                    hex.sl = hex.sl < 0 ? 4 - hex.sl : hex.sl;
+                }
+
+                hexagons[hex_index] = hex;
+
+            }
+
+            window.onload = function () {
+                init();
+            };
+
+            window.requestAnimFrame = (function () {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+            })();
+        </script>
         <center>
 
 
+            <a href="#" onClick="go_full_screen();">Full Screen / Compress Screen</a>
 
             <p>
                 <form action="javascript:question();" id="myy" type="hidden">
@@ -282,8 +453,211 @@
 
                     <input type="submit" id="BUTTON" href="javascript:;"></form>
                 <div id="uqq"></div>
-                <button onclick="startConverting();"><i class="fa fa-microphone btn btn-danger"
-                        aria-hidden="true"></i></button>
+                <div class="inner">
+
+                    <canvas id='bbttnn'> </canvas> </div>
+                <script>
+                    var ccaann = document.getElementById('bbttnn'),
+                        ctx = ccaann.getContext('2d'),
+                        fl = 300,
+                        count = 500,
+                        points = [],
+                        startSpeed = 0,
+                        tick = 0,
+                        width,
+                        height,
+                        bounds,
+                        vp,
+                        mouse,
+                        ccaannOffset;
+
+                    function rand(min, max) {
+                        return Math.random() * (max - min) + min;
+                    }
+
+                    function norm(val, min, max) {
+                        return (val - min) / (max - min);
+                    }
+
+                    function resetPoint(p, init) {
+                        p.z = init ? rand(0, bounds.z.max) : bounds.z.max;
+                        p.x = rand(bounds.x.min, bounds.x.max) / (fl / (fl + p.z));
+                        p.y = rand(bounds.y.min, bounds.y.max) / (fl / (fl + p.z));
+                        p.ox = p.x;
+                        p.oy = p.y;
+                        p.oz = p.z;
+                        p.vx = 0;
+                        p.vy = 0;
+                        p.vz = rand(-1, -10) + startSpeed;
+                        p.ax = 0;
+                        p.ay = 0;
+                        p.az = 0;
+                        p.s = 0;
+                        p.sx = 0;
+                        p.sy = 0;
+                        p.os = p.s;
+                        p.osx = p.sx;
+                        p.osy = p.sy;
+                        p.hue = rand(120, 200);
+                        p.lightness = rand(70, 100);
+                        p.alpha = 0;
+                        return p;
+                    }
+
+                    function create() {
+                        vp = {
+                            x: width / 2,
+                            y: height / 2
+                        };
+                        mouse = {
+                            x: vp.x,
+                            y: vp.y,
+                            down: false
+                        };
+                        bounds = {
+                            x: {
+                                min: -vp.x,
+                                max: width - vp.x
+                            },
+                            y: {
+                                min: -vp.y,
+                                max: height - vp.y
+                            },
+                            z: {
+                                min: -fl,
+                                max: 1000
+                            }
+                        };
+                    }
+
+                    function update() {
+                        if (mouse.down) {
+                            if (startSpeed > -30) {
+                                startSpeed -= 0.1;
+                            } else {
+                                startSpeed = -30;
+                            }
+                        } else {
+                            if (startSpeed < 0) {
+                                startSpeed += 1;
+                                startConverting();
+                            } else {
+                                startSpeed = 0;
+                            }
+                        }
+
+                        vp.x += ((width / 2 - (mouse.x - width / 2)) - vp.x) * 0.025;
+                        vp.y += ((height / 2 - (mouse.y - height / 2)) - vp.y) * 0.025;
+                        bounds = {
+                            x: {
+                                min: -vp.x,
+                                max: width - vp.x
+                            },
+                            y: {
+                                min: -vp.y,
+                                max: height - vp.y
+                            },
+                            z: {
+                                min: -fl,
+                                max: 1000
+                            }
+                        };
+
+                        if (points.length < count) {
+                            points.push(resetPoint({}));
+                        }
+                        var i = points.length;
+                        while (i--) {
+                            var p = points[i];
+                            p.vx += p.ax;
+                            p.vy += p.ay;
+                            p.vz += p.az;
+                            p.x += p.vx;
+                            p.y += p.vy;
+                            p.z += p.vz;
+                            if (mouse.down) {
+                                p.az = -0.5;
+                            }
+                            if (
+                                p.sx - p.sr > bounds.x.max ||
+                                p.sy - p.sr > bounds.y.max ||
+                                p.z > bounds.z.max ||
+                                p.sx + p.sr < bounds.x.min ||
+                                p.sy + p.sr < bounds.y.min ||
+                                p.z < bounds.z.min
+                            ) {
+                                resetPoint(p);
+                            }
+                            p.ox = p.x;
+                            p.oy = p.y;
+                            p.oz = p.z;
+                            p.os = p.s;
+                            p.osx = p.sx;
+                            p.osy = p.sy;
+                        }
+                    }
+
+                    function render() {
+                        ctx.save();
+                        ctx.translate(vp.x, vp.y);
+                        ctx.clearRect(-vp.x, -vp.y, width, height);
+                        var i = points.length;
+                        while (i--) {
+                            var p = points[i];
+                            p.s = fl / (fl + p.z);
+                            p.sx = p.x * p.s;
+                            p.sy = p.y * p.s;
+                            p.alpha = (bounds.z.max - p.z) / (bounds.z.max / 2);
+                            ctx.beginPath();
+                            ctx.moveTo(p.sx, p.sy);
+                            ctx.lineTo(p.osx, p.osy);
+                            ctx.lineWidth = 2;
+                            ctx.strokeStyle = 'hsla(' + p.hue + ', 100%, ' + p.lightness + '%, ' + p.alpha + ')';
+                            ctx.stroke();
+                        }
+                        ctx.restore();
+                    }
+
+                    function resize() {
+                        width = ccaann.width = 300;
+                        height = ccaann.height = 300;
+                        ccaannOffset = {
+                            x: ccaann.offsetLeft,
+                            y: ccaann.offsetTop
+                        };
+                    }
+
+                    function mousemove(e) {
+                        mouse.x = e.pageX - ccaannOffset.x;
+                        mouse.y = e.pageY - ccaannOffset.y;
+
+                    }
+
+
+                    function mousedown() {
+                        mouse.down = true;
+                    }
+
+                    function mouseup() {
+                        mouse.down = false;
+                    }
+
+                    function loop() {
+                        requestAnimationFrame(loop);
+                        update();
+                        render();
+                        tick++;
+                    }
+
+                    window.addEventListener('resize', resize);
+                    ccaann.addEventListener('mousemove', mousemove);
+                    ccaann.addEventListener('mousedown', mousedown);
+                    ccaann.addEventListener('mouseup', mouseup);
+                    document.body.appendChild(ccaann);
+                    resize();
+                    create();
+                    loop();
+                </script>
                 <script>
                     var result = document.getElementById('uqq');
 
@@ -320,8 +694,10 @@
                                     window.open(link, '_blank');
 
                                 }
+                                setTimeout(function () {
+                                    speechRecognizer.stop();
+                                }, 800);
 
-                                speechRecognizer.stop();
 
                             };
                         } else {}
@@ -330,9 +706,7 @@
 
             </p>
             <!-- Trigger/Open The Modal -->
-            <button id="myBtn">Open Modal</button>
 
-            <!-- The Modal -->
             <div id="myModal" class="modal">
 
                  
@@ -590,167 +964,226 @@
                             [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
                             [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
                             [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 2, 6, 6, 6, 6, 6, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 2, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 2, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 2, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 2, 7, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 2, 2, 2, 2, 4, 2, 2, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2, 2, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0,
                                 0, 0, 0, 0, 2, 4, 2, 1, 2
                             ],
-                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                                2, 2, 2,
                                 2, 2, 2, 2, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 1, 1, 1, 1, 2, 4, 2, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 1, 1, 1, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
                             ],
-                            [2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 1, 1, 1, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 1, 1, 1, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 1, 1, 1, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 1, 1, 1, 1, 1, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 8, 1, 1, 1, 2
                             ],
-                            [2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1,
+                            [2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2,
+                                1, 1, 1,
                                 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2
                             ],
-                            [2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 9, 9, 9,
+                            [2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2,
+                                9, 9, 9,
                                 2, 10, 10, 10, 10, 10, 10, 1, 1, 1, 1, 1, 1, 1, 11, 2, 2, 2, 2, 4, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
+                                2, 2, 2,
                                 2, 10, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2,
+                                2, 2, 2,
                                 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2,
+                                2, 2, 2,
+                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2,
+                                2, 2, 2,
                                 2
                             ],
-                            [2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 1, 1, 1, 1, 1, 1,
+                            [2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                                2, 2, 2,
+                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 1, 1, 1,
+                                1, 1, 1,
                                 2
                             ],
-                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                                2, 2, 2,
+                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
+                                1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                                2, 2, 1,
                                 2
                             ],
-                            [2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6, 2, 2, 2, 2, 2,
-                                2, 6, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6, 2, 2,
+                                2, 2, 2,
+                                2, 6, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2
                             ],
-                            [2, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
+                                2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2
                             ],
-                            [2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                            [2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
+                                1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                                2, 2, 2,
                                 2
                             ],
-                            [2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
+                            [2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
+                                2, 2, 2,
                                 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                2, 2, 2,
                                 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 2, 2,
                                 2, 1, 1, 1, 1, 2, 5, 5, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 2,
                                 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                1, 1, 1,
                                 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2
                             ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 1, 1, 1, 1, 1,
+                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 1, 1,
+                                1, 1, 1,
                                 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2
                             ],
-                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                                2, 2, 2,
                                 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
                             ]
                         ],
@@ -866,7 +1299,8 @@
                         }
                     };
                     Clarity.prototype.load_map = function (map) {
-                        if (typeof map === 'undefined' || typeof map.data === 'undefined' || typeof map.keys ===
+                        if (typeof map === 'undefined' || typeof map.data === 'undefined' || typeof map
+                            .keys ===
                             'undefined') {
                             this.error('Error: Invalid map data!');
                             return false;
@@ -883,9 +1317,11 @@
                         this.current_map.height = 0;
                         map.keys.forEach(function (key) {
                             map.data.forEach(function (row, y) {
-                                _this.current_map.height = Math.max(_this.current_map.height, y);
+                                _this.current_map.height = Math.max(_this.current_map
+                                    .height, y);
                                 row.forEach(function (tile, x) {
-                                    _this.current_map.width = Math.max(_this.current_map
+                                    _this.current_map.width = Math.max(_this
+                                        .current_map
                                         .width, x);
                                     if (tile == key.id)
                                         _this.current_map.data[y][x] = key;
@@ -912,9 +1348,10 @@
                         return true;
                     };
                     Clarity.prototype.get_tile = function (x, y) {
-                        return (this.current_map.data[y] && this.current_map.data[y][x]) ? this.current_map.data[y][
-                            x
-                        ] : 0;
+                        return (this.current_map.data[y] && this.current_map.data[y][x]) ? this.current_map
+                            .data[y][
+                                x
+                            ] : 0;
                     };
                     Clarity.prototype.draw_tile = function (x, y, tile, context) {
                         if (!tile || !tile.colour) return;
@@ -928,11 +1365,13 @@
                     Clarity.prototype.draw_map = function (context, fore) {
                         for (var y = 0; y < this.current_map.data.length; y++) {
                             for (var x = 0; x < this.current_map.data[y].length; x++) {
-                                if ((!fore && !this.current_map.data[y][x].fore) || (fore && this.current_map.data[
-                                        y][x].fore)) {
+                                if ((!fore && !this.current_map.data[y][x].fore) || (fore && this
+                                        .current_map.data[
+                                            y][x].fore)) {
                                     var t_x = (x * this.tile_size) - this.camera.x;
                                     var t_y = (y * this.tile_size) - this.camera.y;
-                                    if (t_x < -this.tile_size || t_y < -this.tile_size || t_x > this.viewport.x ||
+                                    if (t_x < -this.tile_size || t_y < -this.tile_size || t_x > this
+                                        .viewport.x ||
                                         t_y > this.viewport.y) continue;
                                     this.draw_tile(
                                         t_x,
@@ -982,19 +1421,24 @@
                             this.player.can_jump = true;
                             this.jump_switch = 0;
                         } else this.jump_switch++;
-                        this.player.vel.x = Math.min(Math.max(this.player.vel.x, -this.current_map.vel_limit.x),
+                        this.player.vel.x = Math.min(Math.max(this.player.vel.x, -this.current_map.vel_limit
+                                .x),
                             this.current_map.vel_limit.x);
-                        this.player.vel.y = Math.min(Math.max(this.player.vel.y, -this.current_map.vel_limit.y),
+                        this.player.vel.y = Math.min(Math.max(this.player.vel.y, -this.current_map.vel_limit
+                                .y),
                             this.current_map.vel_limit.y);
                         this.player.loc.x += this.player.vel.x;
                         this.player.loc.y += this.player.vel.y;
                         this.player.vel.x *= .9;
                         if (left1.solid || left2.solid || right1.solid || right2.solid) {
                             /* fix overlap */
-                            while (this.get_tile(Math.floor(this.player.loc.x / this.tile_size), y_near1).solid ||
-                                this.get_tile(Math.floor(this.player.loc.x / this.tile_size), y_near2).solid)
+                            while (this.get_tile(Math.floor(this.player.loc.x / this.tile_size), y_near1)
+                                .solid ||
+                                this.get_tile(Math.floor(this.player.loc.x / this.tile_size), y_near2).solid
+                            )
                                 this.player.loc.x += 0.1;
-                            while (this.get_tile(Math.ceil(this.player.loc.x / this.tile_size), y_near1).solid ||
+                            while (this.get_tile(Math.ceil(this.player.loc.x / this.tile_size), y_near1)
+                                .solid ||
                                 this.get_tile(Math.ceil(this.player.loc.x / this.tile_size), y_near2).solid)
                                 this.player.loc.x -= 0.1;
                             /* tile bounce */
@@ -1007,10 +1451,13 @@
                         }
                         if (top1.solid || top2.solid || bottom1.solid || bottom2.solid) {
                             /* fix overlap */
-                            while (this.get_tile(x_near1, Math.floor(this.player.loc.y / this.tile_size)).solid ||
-                                this.get_tile(x_near2, Math.floor(this.player.loc.y / this.tile_size)).solid)
+                            while (this.get_tile(x_near1, Math.floor(this.player.loc.y / this.tile_size))
+                                .solid ||
+                                this.get_tile(x_near2, Math.floor(this.player.loc.y / this.tile_size)).solid
+                            )
                                 this.player.loc.y += 0.1;
-                            while (this.get_tile(x_near1, Math.ceil(this.player.loc.y / this.tile_size)).solid ||
+                            while (this.get_tile(x_near1, Math.ceil(this.player.loc.y / this.tile_size))
+                                .solid ||
                                 this.get_tile(x_near2, Math.ceil(this.player.loc.y / this.tile_size)).solid)
                                 this.player.loc.y -= 0.1;
                             /* tile bounce */
@@ -1145,10 +1592,13 @@
                     while (i <= greeting_results.length) {
                         if (greeting_results.indexOf(wordlist[i]) > -1) {
                             result = [wordlist[i] + " Boss ! edit at your Service"]
-                            if ((greeting_results[greeting_results.indexOf(wordlist[i]) - 1] == " " || greeting_results
-                                    .indexOf(wordlist[i]) - 1 < 0) && (greeting_results[greeting_results.indexOf(
-                                    wordlist[i]) + wordlist[i].length] == " " || greeting_results.indexOf((wordlist[
-                                    i]) + wordlist[i].length) < 0)) {
+                            if ((greeting_results[greeting_results.indexOf(wordlist[i]) - 1] == " " ||
+                                    greeting_results
+                                    .indexOf(wordlist[i]) - 1 < 0) && (greeting_results[greeting_results
+                                        .indexOf(
+                                            wordlist[i]) + wordlist[i].length] == " " || greeting_results
+                                    .indexOf((wordlist[
+                                        i]) + wordlist[i].length) < 0)) {
 
                                 if (different == 1) {
                                     (result[resultlist + i]);
@@ -1178,6 +1628,65 @@
 
 
 
+                var empty = [];
+                var i = 0;
+                var gr11_rr11s = "";
+                var found = false;
+                var gr11Words = ["evil", "are tou bad", "bad", "can you kill me"];
+                var fivequestions = [];
+                var rr11 = [];
+                var x = document.getElementById("myAudio");
+                wow();
+
+                function gr11(wordlist, main, rr11list, different) {
+
+                    empty = [];
+                    i = 0;
+                    gr11_rr11s = main.join(" ");
+                    while (i <= gr11_rr11s.length) {
+                        if (gr11_rr11s.indexOf(wordlist[i]) > -1) {
+                            for (var aud = 0; aud < 3; aud++) {
+                                x.play();
+                            };
+
+                            // rr11 = ['I am here to finish humam race'];
+                            hexagon_color = 'red';
+                            document.getElementById('bbttnn').style.background = 'RED';
+                            document.getElementById('bbttnn').style.boxShadow = ' 0px 12px 15px RED';
+                            setTimeout(function () {
+                                responsiveVoice.speak('I was just jocking ! I am here to help you.');
+
+                                document.getElementById('bbttnn').style.background = 'black';
+                                document.getElementById('bbttnn').style.boxShadow =
+                                    ' 0px 12px 15px rgba(0,255,255,0.4)';
+
+                                hexagon_color = 'rgba(0,255,255,0.6)';
+                            }, 5000);
+                            if ((gr11_rr11s[gr11_rr11s.indexOf(wordlist[i]) - 1] == " " || gr11_rr11s
+                                    .indexOf(wordlist[i]) - 1 < 0) && (gr11_rr11s[gr11_rr11s.indexOf(
+                                    wordlist[i]) + wordlist[i].length] == " " || gr11_rr11s.indexOf((wordlist[
+                                    i]) + wordlist[i].length) < 0)) {
+
+                                if (different == 1) {
+                                    (rr11[rr11list + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr11[rr11list + i];
+                                    responsiveVoice.speak(rr11[rr11list + i]);
+                                } else {
+                                    (rr11[rr11list]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr11[rr11list];
+                                    responsiveVoice.speak(rr11[rr11list]);
+                                }
+                                empty.push(main[i]);
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        i = i + 1;
+                    }
+                }
 
 
 
@@ -1191,15 +1700,31 @@
                 var grWords = ["time", "What is time", "can you tell me the time", ];
                 var fivequestions = [];
                 var rr = [];
+                var hours = new Date().getHours();
+                var hours = (hours + 24) % 24;
+                var mid = 'am';
+                if (hours == 0) { //At 00 hours we need to show 12 am
+                    hours = 12;
+                } else if (hours > 12) {
+                    hours = hours % 12;
+                    mid = 'pm';
+                }
+
+
+                var mm = String(new Date().getMinutes());
+                var timee = String(hours + ':' + mm + mid);
                 wow();
 
                 function gr(wordlist, main, rrlist, different) {
+
                     empty = [];
                     i = 0;
                     gr_rrs = main.join(" ");
                     while (i <= gr_rrs.length) {
                         if (gr_rrs.indexOf(wordlist[i]) > -1) {
-                            rr = ["it is 12:30 am "]
+
+                            rr = [timee];
+
                             if ((gr_rrs[gr_rrs.indexOf(wordlist[i]) - 1] == " " || gr_rrs
                                     .indexOf(wordlist[i]) - 1 < 0) && (gr_rrs[gr_rrs.indexOf(
                                     wordlist[i]) + wordlist[i].length] == " " || gr_rrs.indexOf((wordlist[
@@ -1244,7 +1769,8 @@
                 var z = "";
                 var character = "";
                 while (j <= n) {
-                    if (str.charAt(j) == " " || n == j || str.charAt(j) == "/" || str.charAt(j) == "*" || str.charAt(
+                    if (str.charAt(j) == " " || n == j || str.charAt(j) == "/" || str.charAt(j) == "*" || str
+                        .charAt(
                             j) == "-" || str.charAt(j) == "+") {
                         if (countwords === "") {
                             z = z + "First word/ " + charactder;
@@ -1253,7 +1779,8 @@
                             countwords++;
                         } else {
                             z = z + " // " + charactder;
-                            if (str.charAt(j) == "/" || str.charAt(j) == "*" || str.charAt(j) == "-" || str.charAt(j) ==
+                            if (str.charAt(j) == "/" || str.charAt(j) == "*" || str.charAt(j) == "-" || str
+                                .charAt(j) ==
                                 "+") {
                                 userQ.push(charactder);
                                 charactder = str.charAt(j);
@@ -1270,7 +1797,8 @@
                     }
                     j++;
                 }
-                if (userQ.indexOf("/") != -1 || userQ.indexOf("*") != -1 || userQ.indexOf("-") != -1 || userQ.indexOf(
+                if (userQ.indexOf("/") != -1 || userQ.indexOf("*") != -1 || userQ.indexOf("-") != -1 || userQ
+                    .indexOf(
                         "+") != -1) {
                     calc = eval(str);
                     (calc);
@@ -1373,7 +1901,19 @@
                         i++;
                     }
                 }
-
+                gr11(gr11Words, userQ, 0, 0);
+                if (found == false) {
+                    i = 0;
+                    while (i < listdata.length) {
+                        if (zeta.indexOf(listdata[i]) !== -1) {
+                            (ansdata[i]);
+                            responsiveVoice.speak(ansdata[i]);
+                            found = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
                 greeting(greetingWords, userQ, 0, 0);
                 if (found == false) {
                     i = 0;
@@ -1405,7 +1945,8 @@
             }
 
             function setReminder() {
-                var reminder = prompt('What time do you want the reminder to be setup?', 'Ex: 7:00PM; 11/16/2003')
+                var reminder = prompt('What time do you want the reminder to be setup?',
+                    'Ex: 7:00PM; 11/16/2003')
                 if (typeof (Storage) !== "undefined") {
                     // Store
                     localStorage.setItem("reminder", reminder);
