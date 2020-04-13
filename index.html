@@ -4,6 +4,7 @@
     <head>
 
         <title>Rajat</title>
+        <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -275,7 +276,8 @@
                 display: block;
                 border-radius: 50%;
                 z-index: 5555555;
-                background: rgba(0, 0, 0, 1);
+                background: #000;
+                color: #fff;
                 -moz-box-shadow: inset 0 0 10px cyan;
                 -webkit-box-shadow: inset 0 0 10px #bbb;
                 box-shadow: inset 0 0 10px cyan;
@@ -454,11 +456,14 @@
                     <input type="submit" id="BUTTON" href="javascript:;"></form>
                 <div id="uqq"></div>
                 <div class="inner">
-
-                    <canvas id='bbttnn'> </canvas> </div>
+                    <h1 style="z-index:99999999999999999;color:#fff;">yyttttt</h1>
+                    <canvas id='bbttnn' style="font-family: 'Orbitron', sans-serif;">
+                        <h1 style="z-index:99999999999999999999999999999999999999999999999999">yyttttt</h1>
+                    </canvas>
+                </div>
                 <script>
-                    var ccaann = document.getElementById('bbttnn'),
-                        ctx = ccaann.getContext('2d'),
+                    var ccaann = document.getElementById('bbttnn');
+                    var ctx = ccaann.getContext('2d'),
                         fl = 300,
                         count = 500,
                         points = [],
@@ -597,9 +602,14 @@
                         }
                     }
 
+
+
                     function render() {
+
+
                         ctx.save();
                         ctx.translate(vp.x, vp.y);
+
                         ctx.clearRect(-vp.x, -vp.y, width, height);
                         var i = points.length;
                         while (i--) {
@@ -670,6 +680,17 @@
                 <script>
                     var result = document.getElementById('uqq');
 
+
+                    function doc_keyUp(e) {
+
+                        // this would test for whichever key is 40 and the ctrl key at the same time
+                        if (e.keyCode == 32) {
+                            // call your function to do the thing
+                            startConverting();
+                        }
+                    }
+                    document.addEventListener('keyup', doc_keyUp, false);
+
                     function startConverting() {
 
                         if ('webkitSpeechRecognition' in window) {
@@ -701,6 +722,13 @@
                                     responsiveVoice.speak("Here is what i found on google about " + wordd);
                                     let link = 'https://www.google.com/search?q=' + wordd;
                                     window.open(link, '_blank');
+
+                                }
+                                if (finalTranscripts.substring(0, 4) === "play") {
+                                    const worddd = finalTranscripts.slice(4);
+                                    responsiveVoice.speak("Here is what i found on Youtube about " + worddd);
+                                    let linkp = 'https://www.youtube.com/results?search_query=' + worddd;
+                                    window.open(linkp, '_blank');
 
                                 }
                                 setTimeout(function () {
@@ -739,9 +767,6 @@
                 var span = document.getElementsByClassName("close")[0];
 
                 // When the user clicks the button, open the modal 
-                openmodal() {
-                    modal.style.display = "block";
-                }
 
                 // When the user clicks on <span> (x), close the modal
                 span.onclick = function () {
@@ -1635,6 +1660,353 @@
 
                 }
 
+                var empty = [];
+                var i = 0;
+                var gg3_rr3s = "";
+                var found = false;
+                var gg3Words = ["system"];
+                var fivequestions = [];
+                var rr3 = [];
+                wow();
+
+                function gg3(wordlist, main, rr3list, different) {
+                    empty = [];
+                    i = 0;
+                    gg3_rr3s = main.join(" ");
+                    while (i <= gg3_rr3s.length) {
+                        if (gg3_rr3s.indexOf(wordlist[i]) > -1) {
+
+                            (function (window) {
+                                {
+                                    var unknown = '-';
+
+                                    // screen
+                                    var screenSize = '';
+                                    if (screen.width) {
+                                        width = (screen.width) ? screen.width : '';
+                                        height = (screen.height) ? screen.height : '';
+                                        screenSize += '' + width + " x " + height;
+                                    }
+
+                                    // browser
+                                    var nVer = navigator.appVersion;
+                                    var nAgt = navigator.userAgent;
+                                    var browser = navigator.appName;
+                                    var version = '' + parseFloat(navigator.appVersion);
+                                    var majorVersion = parseInt(navigator.appVersion, 10);
+                                    var nameOffset, verOffset, ix;
+
+                                    // Opera
+                                    if ((verOffset = nAgt.indexOf('Opera')) != -1) {
+                                        browser = 'Opera';
+                                        version = nAgt.substring(verOffset + 6);
+                                        if ((verOffset = nAgt.indexOf('Version')) != -1) {
+                                            version = nAgt.substring(verOffset + 8);
+                                        }
+                                    }
+                                    // Opera Next
+                                    if ((verOffset = nAgt.indexOf('OPR')) != -1) {
+                                        browser = 'Opera';
+                                        version = nAgt.substring(verOffset + 4);
+                                    }
+                                    // Edge
+                                    else if ((verOffset = nAgt.indexOf('Edge')) != -1) {
+                                        browser = 'Microsoft Edge';
+                                        version = nAgt.substring(verOffset + 5);
+                                    }
+                                    // MSIE
+                                    else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
+                                        browser = 'Microsoft Internet Explorer';
+                                        version = nAgt.substring(verOffset + 5);
+                                    }
+                                    // Chrome
+                                    else if ((verOffset = nAgt.indexOf('Chrome')) != -1) {
+                                        browser = 'Chrome';
+                                        version = nAgt.substring(verOffset + 7);
+                                    }
+                                    // Safari
+                                    else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
+                                        browser = 'Safari';
+                                        version = nAgt.substring(verOffset + 7);
+                                        if ((verOffset = nAgt.indexOf('Version')) != -1) {
+                                            version = nAgt.substring(verOffset + 8);
+                                        }
+                                    }
+                                    // Firefox
+                                    else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
+                                        browser = 'Firefox';
+                                        version = nAgt.substring(verOffset + 8);
+                                    }
+                                    // MSIE 11+
+                                    else if (nAgt.indexOf('Trident/') != -1) {
+                                        browser = 'Microsoft Internet Explorer';
+                                        version = nAgt.substring(nAgt.indexOf('rv:') + 3);
+                                    }
+                                    // Other browsers
+                                    else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt
+                                            .lastIndexOf('/'))) {
+                                        browser = nAgt.substring(nameOffset, verOffset);
+                                        version = nAgt.substring(verOffset + 1);
+                                        if (browser.toLowerCase() == browser.toUpperCase()) {
+                                            browser = navigator.appName;
+                                        }
+                                    }
+                                    // trim the version string
+                                    if ((ix = version.indexOf(';')) != -1) version = version.substring(0, ix);
+                                    if ((ix = version.indexOf(' ')) != -1) version = version.substring(0, ix);
+                                    if ((ix = version.indexOf(')')) != -1) version = version.substring(0, ix);
+
+                                    majorVersion = parseInt('' + version, 10);
+                                    if (isNaN(majorVersion)) {
+                                        version = '' + parseFloat(navigator.appVersion);
+                                        majorVersion = parseInt(navigator.appVersion, 10);
+                                    }
+
+                                    // mobile version
+                                    var mobile = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(nVer);
+
+                                    // cookie
+                                    var cookieEnabled = (navigator.cookieEnabled) ? true : false;
+
+                                    if (typeof navigator.cookieEnabled == 'undefined' && !cookieEnabled) {
+                                        document.cookie = 'testcookie';
+                                        cookieEnabled = (document.cookie.indexOf('testcookie') != -1) ? true :
+                                            false;
+                                    }
+
+                                    // system
+                                    var os = unknown;
+                                    var clientStrings = [{
+                                            s: 'Windows 10',
+                                            r: /(Windows 10.0|Windows NT 10.0)/
+                                        },
+                                        {
+                                            s: 'Windows 8.1',
+                                            r: /(Windows 8.1|Windows NT 6.3)/
+                                        },
+                                        {
+                                            s: 'Windows 8',
+                                            r: /(Windows 8|Windows NT 6.2)/
+                                        },
+                                        {
+                                            s: 'Windows 7',
+                                            r: /(Windows 7|Windows NT 6.1)/
+                                        },
+                                        {
+                                            s: 'Windows Vista',
+                                            r: /Windows NT 6.0/
+                                        },
+                                        {
+                                            s: 'Windows Server 2003',
+                                            r: /Windows NT 5.2/
+                                        },
+                                        {
+                                            s: 'Windows XP',
+                                            r: /(Windows NT 5.1|Windows XP)/
+                                        },
+                                        {
+                                            s: 'Windows 2000',
+                                            r: /(Windows NT 5.0|Windows 2000)/
+                                        },
+                                        {
+                                            s: 'Windows ME',
+                                            r: /(Win 9x 4.90|Windows ME)/
+                                        },
+                                        {
+                                            s: 'Windows 98',
+                                            r: /(Windows 98|Win98)/
+                                        },
+                                        {
+                                            s: 'Windows 95',
+                                            r: /(Windows 95|Win95|Windows_95)/
+                                        },
+                                        {
+                                            s: 'Windows NT 4.0',
+                                            r: /(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/
+                                        },
+                                        {
+                                            s: 'Windows CE',
+                                            r: /Windows CE/
+                                        },
+                                        {
+                                            s: 'Windows 3.11',
+                                            r: /Win16/
+                                        },
+                                        {
+                                            s: 'Android',
+                                            r: /Android/
+                                        },
+                                        {
+                                            s: 'Open BSD',
+                                            r: /OpenBSD/
+                                        },
+                                        {
+                                            s: 'Sun OS',
+                                            r: /SunOS/
+                                        },
+                                        {
+                                            s: 'Chrome OS',
+                                            r: /CrOS/
+                                        },
+                                        {
+                                            s: 'Linux',
+                                            r: /(Linux|X11(?!.*CrOS))/
+                                        },
+                                        {
+                                            s: 'iOS',
+                                            r: /(iPhone|iPad|iPod)/
+                                        },
+                                        {
+                                            s: 'Mac OS X',
+                                            r: /Mac OS X/
+                                        },
+                                        {
+                                            s: 'Mac OS',
+                                            r: /(MacPPC|MacIntel|Mac_PowerPC|Macintosh)/
+                                        },
+                                        {
+                                            s: 'QNX',
+                                            r: /QNX/
+                                        },
+                                        {
+                                            s: 'UNIX',
+                                            r: /UNIX/
+                                        },
+                                        {
+                                            s: 'BeOS',
+                                            r: /BeOS/
+                                        },
+                                        {
+                                            s: 'OS/2',
+                                            r: /OS\/2/
+                                        },
+                                        {
+                                            s: 'Search Bot',
+                                            r: /(nuhk|Googlebot|Yammybot|Openbot|Slurp|MSNBot|Ask Jeeves\/Teoma|ia_archiver)/
+                                        }
+                                    ];
+                                    for (var id in clientStrings) {
+                                        var cs = clientStrings[id];
+                                        if (cs.r.test(nAgt)) {
+                                            os = cs.s;
+                                            break;
+                                        }
+                                    }
+
+                                    var osVersion = unknown;
+
+                                    if (/Windows/.test(os)) {
+                                        osVersion = /Windows (.*)/.exec(os)[1];
+                                        os = 'Windows';
+                                    }
+
+                                    switch (os) {
+                                        case 'Mac OS X':
+                                            osVersion = /Mac OS X (10[\.\_\d]+)/.exec(nAgt)[1];
+                                            break;
+
+                                        case 'Android':
+                                            osVersion = /Android ([\.\_\d]+)/.exec(nAgt)[1];
+                                            break;
+
+                                        case 'iOS':
+                                            osVersion = /OS (\d+)_(\d+)_?(\d+)?/.exec(nVer);
+                                            osVersion = osVersion[1] + '.' + osVersion[2] + '.' + (osVersion[3] |
+                                                0);
+                                            break;
+                                    }
+
+                                    // flash (you'll need to include swfobject)
+                                    /* script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js" */
+                                    var flashVersion = 'no check';
+                                    if (typeof swfobject != 'undefined') {
+                                        var fv = swfobject.getFlashPlayerVersion();
+                                        if (fv.major > 0) {
+                                            flashVersion = fv.major + '.' + fv.minor + ' r' + fv.release;
+                                        } else {
+                                            flashVersion = unknown;
+                                        }
+                                    }
+                                }
+
+                                window.jscd = {
+                                    screen: screenSize,
+                                    browser: browser,
+                                    browserVersion: version,
+                                    browserMajorVersion: majorVersion,
+                                    mobile: mobile,
+                                    os: os,
+                                    osVersion: osVersion,
+                                    cookies: cookieEnabled,
+                                    flashVersion: flashVersion
+                                };
+                            }(this));
+
+                            // alert(
+                            //     'OS: ' + jscd.os + ' ' + jscd.osVersion + '\n' +
+                            //     'Browser: ' + jscd.browser + ' ' + jscd.browserMajorVersion +
+                            //     ' (' + jscd.browserVersion + ')\n' +
+                            //     'Mobile: ' + jscd.mobile + '\n' +
+                            //     'Flash: ' + jscd.flashVersion + '\n' +
+                            //     'Cookies: ' + jscd.cookies + '\n' +
+                            //     'Screen Size: ' + jscd.screen + '\n\n' +
+                            //     'Full User Agent: ' + navigator.userAgent
+                            // );
+                            rr3 = ['here is your system details.OS: ' + jscd.os + ' ' + jscd.osVersion + '  ' +
+                                'Browser: ' + jscd.browser + ' ' + jscd.browserMajorVersion +
+                                ' (' + jscd.browserVersion + ')  ' +
+                                'Mobile: ' + jscd.mobile + '  ' +
+                                'Flash: ' + jscd.flashVersion + '  ' +
+                                'Cookies: ' + jscd.cookies + '  ' +
+                                'Screen Size: ' + jscd.screen + 'px    ' +
+                                'Full User Agent: ' + navigator.userAgent
+                            ];
+                            hexagon_color = 'rgba(113,246,9,0.7)';
+                            document.getElementById('bbttnn').style.background = 'rgba(113,246,9,0.6)';
+                            document.getElementById('bbttnn').style.boxShadow = ' 0px 12px 15px rgba(113,246,9,0.6)';
+                            setTimeout(function () {
+
+                                document.getElementById('bbttnn').style.background = 'black';
+                                document.getElementById('bbttnn').style.boxShadow =
+                                    ' 0px 12px 15px rgba(0,255,255,0.4)';
+
+                                hexagon_color = 'rgba(0,255,255,0.6)';
+                            }, 20000);
+                            if ((gg3_rr3s[gg3_rr3s.indexOf(wordlist[i]) - 1] == " " ||
+                                    gg3_rr3s
+                                    .indexOf(wordlist[i]) - 1 < 0) && (gg3_rr3s[gg3_rr3s
+                                        .indexOf(
+                                            wordlist[i]) + wordlist[i].length] == " " || gg3_rr3s
+                                    .indexOf((wordlist[
+                                        i]) + wordlist[i].length) < 0)) {
+
+                                if (different == 1) {
+                                    (rr3[rr3list + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr3[rr3list + i];
+                                    responsiveVoice.speak(rr3[rr3list + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    finalTranscripts = '';
+                                    rr3.innerHTML = '';
+                                    document.getElementById('uq').value = '';
+                                    document.getElementById("myy").submit();
+                                } else {
+                                    (rr3[rr3list]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr3[rr3list];
+                                    responsiveVoice.speak(rr3[rr3list]);
+                                }
+                                empty.push(main[i]);
+                                found = true;
+                                break;
+                            }
+                        }
+                        i = i + 1;
+                    }
+
+                }
+
+
 
 
                 var empty = [];
@@ -1701,6 +2073,65 @@
 
 
 
+                var empty = [];
+                var i = 0;
+                var gr2_rr2s = "";
+                var found = false;
+                var gr2Words = ["stopwatch"];
+                var fivequestions = [];
+                var rr2 = [];
+                wow();
+
+                function gr2(wordlist, main, rr2list, different) {
+
+                    empty = [];
+                    i = 0;
+                    gr2_rr2s = main.join(" ");
+                    while (i <= gr2_rr2s.length) {
+                        if (gr2_rr2s.indexOf(wordlist[i]) > -1) {
+                            var totall = "hello";
+                            var cac = document.getElementById("bbttnn");
+                            ctx = cac.getContext("2d");
+                            var link = document.createElement('link');
+                            link.rel = 'stylesheet';
+                            link.type = 'text/css';
+                            link.href = "https://fonts.googleapis.com/css?family=Orbitron&display=swap";
+                            document.getElementsByTagName('head')[0].appendChild(link);
+
+                            ctx.fillStyle = "red";
+                            ctx.font = "30px 'Orbitron'";
+                            ctx.fillText(dis, 80, 50);
+
+
+
+                            alert(stopwatcch);
+
+                            if ((gr2_rr2s[gr2_rr2s.indexOf(wordlist[i]) - 1] == " " || gr2_rr2s
+                                    .indexOf(wordlist[i]) - 1 < 0) && (gr2_rr2s[gr2_rr2s.indexOf(
+                                    wordlist[i]) + wordlist[i].length] == " " || gr2_rr2s.indexOf((wordlist[
+                                    i]) + wordlist[i].length) < 0)) {
+
+                                if (different == 1) {
+                                    (rr2[rr2list + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr2[rr2list + i];
+                                    responsiveVoice.speak(rr2[rr2list + i]);
+                                } else {
+                                    (rr2[rr2list]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr2[rr2list];
+                                    responsiveVoice.speak(rr2[rr2list]);
+                                }
+                                empty.push(main[i]);
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        i = i + 1;
+                    }
+                }
+
 
                 var empty = [];
                 var i = 0;
@@ -1733,7 +2164,11 @@
                         if (gr_rrs.indexOf(wordlist[i]) > -1) {
 
                             rr = [timee];
-
+                            var cac = document.getElementById("bbttnn");
+                            ctx = cac.getContext("2d");
+                            ctx.fillStyle = "cyan";
+                            ctx.font = "50px space age";
+                            ctx.fillText(timee, 60, 160);
                             if ((gr_rrs[gr_rrs.indexOf(wordlist[i]) - 1] == " " || gr_rrs
                                     .indexOf(wordlist[i]) - 1 < 0) && (gr_rrs[gr_rrs.indexOf(
                                     wordlist[i]) + wordlist[i].length] == " " || gr_rrs.indexOf((wordlist[
@@ -1896,8 +2331,33 @@
                 }
 
 
-
+                gr2(gr2Words, userQ, 0, 0);
+                if (found == false) {
+                    i = 0;
+                    while (i < listdata.length) {
+                        if (zeta.indexOf(listdata[i]) !== -1) {
+                            (ansdata[i]);
+                            responsiveVoice.speak(ansdata[i]);
+                            found = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
                 gr(grWords, userQ, 0, 0);
+                if (found == false) {
+                    i = 0;
+                    while (i < listdata.length) {
+                        if (zeta.indexOf(listdata[i]) !== -1) {
+                            (ansdata[i]);
+                            responsiveVoice.speak(ansdata[i]);
+                            found = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+                gg3(gg3Words, userQ, 0, 0);
                 if (found == false) {
                     i = 0;
                     while (i < listdata.length) {
