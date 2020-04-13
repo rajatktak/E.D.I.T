@@ -1952,13 +1952,13 @@
                             //     'Screen Size: ' + jscd.screen + '\n\n' +
                             //     'Full User Agent: ' + navigator.userAgent
                             // );
-                            rr3 = ['here is your system details.OS: ' + jscd.os + ' ' + jscd.osVersion + '  ' +
+                            rr3 = ['here is your system details.OS: ' + jscd.os + ' ' + jscd.osVersion + '\n' +
                                 'Browser: ' + jscd.browser + ' ' + jscd.browserMajorVersion +
-                                ' (' + jscd.browserVersion + ')  ' +
-                                'Mobile: ' + jscd.mobile + '  ' +
-                                'Flash: ' + jscd.flashVersion + '  ' +
-                                'Cookies: ' + jscd.cookies + '  ' +
-                                'Screen Size: ' + jscd.screen + 'px    ' +
+                                ' (' + jscd.browserVersion + ')\n' +
+                                'Mobile: ' + jscd.mobile + '\n' +
+                                'Flash: ' + jscd.flashVersion + '\n' +
+                                'Cookies: ' + jscd.cookies + '\n' +
+                                'Screen Size: ' + jscd.screen + 'px\n\n' +
                                 'Full User Agent: ' + navigator.userAgent
                             ];
                             hexagon_color = 'rgba(113,246,9,0.7)';
@@ -1971,7 +1971,7 @@
                                     ' 0px 12px 15px rgba(0,255,255,0.4)';
 
                                 hexagon_color = 'rgba(0,255,255,0.6)';
-                            }, 20000);
+                            }, 25000);
                             if ((gg3_rr3s[gg3_rr3s.indexOf(wordlist[i]) - 1] == " " ||
                                     gg3_rr3s
                                     .indexOf(wordlist[i]) - 1 < 0) && (gg3_rr3s[gg3_rr3s
