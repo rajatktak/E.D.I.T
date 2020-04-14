@@ -447,7 +447,7 @@
         <center>
 
 
-            <a href="#" class="switch">Full Screen / Compress Screen</a>
+            <a href="#" class="switch">Full Screen </a>
 
             <p>
                 <form action="javascript:question();" id="myy" type="hidden">
@@ -456,60 +456,6 @@
                     <input type="submit" id="BUTTON" href="javascript:;"></form>
                 <button class="switch">On / Off</button>
 
-                <script>
-                    const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
-
-                    if (SUPPORTS_MEDIA_DEVICES) {
-                        //Get the environment camera (usually the second one)
-                        navigator.mediaDevices.enumerateDevices().then(devices => {
-
-                            const cameras = devices.filter((device) => device.kind === 'videoinput');
-
-                            if (cameras.length === 0) {
-                                throw 'No camera found on this device.';
-                            }
-                            const camera = cameras[cameras.length - 1];
-
-                            // Create stream and get video track
-                            navigator.mediaDevices.getUserMedia({
-                                video: {
-                                    deviceId: camera.deviceId,
-                                    facingMode: ['user', 'environment'],
-                                    height: {
-                                        ideal: 1080
-                                    },
-                                    width: {
-                                        ideal: 1920
-                                    }
-                                }
-                            }).then(stream => {
-                                const track = stream.getVideoTracks()[0];
-
-                                //Create image capture object and get camera capabilities
-                                const imageCapture = new ImageCapture(track)
-                                const photoCapabilities = imageCapture.getPhotoCapabilities().then(
-                                    () => {
-
-                                        //todo: check if camera has a torch
-
-                                        //let there be light!
-                                        const btn = document.querySelector('.switch');
-                                        btn.addEventListener('click', function () {
-                                            track.applyConstraints({
-                                                advanced: [{
-                                                    torch: true
-                                                }]
-                                            });
-                                        });
-                                    });
-                            });
-                        });
-
-                        //The light will be on as long the track exists
-
-
-                    }
-                </script>
                 <div id="uqq"></div>
                 <div class="inner">
                     <h1 style="z-index:99999999999999999;color:#fff;">yyttttt</h1>
@@ -2143,6 +2089,103 @@
 
 
 
+
+
+                var empty = [];
+                var i = 0;
+                var gg4_rr4s = "";
+                var found = false;
+                var gg4Words = ["flash on", "flash off"];
+                var fivequestions = [];
+                var rr4 = [];
+
+
+                function gg4(wordlist, main, rr4list, different) {
+
+                    empty = [];
+                    i = 0;
+                    gg4_rr4s = main.join(" ");
+                    while (i <= gg4_rr4s.length) {
+                        if (gg4_rr4s.indexOf(wordlist[i]) > -1) {
+
+                            const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
+
+                            if (SUPPORTS_MEDIA_DEVICES) {
+                                //Get the environment camera (usually the second one)
+                                navigator.mediaDevices.enumerateDevices().then(devices => {
+
+                                    const cameras = devices.filter((device) => device.kind === 'videoinput');
+
+                                    if (cameras.length === 0) {
+                                        throw 'No camera found on this device.';
+                                    }
+                                    const camera = cameras[cameras.length - 1];
+
+                                    // Create stream and get video track
+                                    navigator.mediaDevices.getUserMedia({
+                                        video: {
+                                            deviceId: camera.deviceId,
+                                            facingMode: ['user', 'environment'],
+                                            height: {
+                                                ideal: 1080
+                                            },
+                                            width: {
+                                                ideal: 1920
+                                            }
+                                        }
+                                    }).then(stream => {
+                                        const track = stream.getVideoTracks()[0];
+
+                                        const imageCapture = new ImageCapture(track)
+                                        const photoCapabilities = imageCapture.getPhotoCapabilities()
+                                            .then(
+                                                () => {
+
+
+                                                    track.applyConstraints({
+                                                        advanced: [{
+                                                            torch: true
+                                                        }]
+                                                    });
+
+                                                });
+                                    });
+                                });
+
+
+                            }
+                            if ((gg4_rr4s[gg4_rr4s.indexOf(wordlist[i]) - 1] == " " || gg4_rr4s
+                                    .indexOf(wordlist[i]) - 1 < 0) && (gg4_rr4s[gg4_rr4s.indexOf(
+                                    wordlist[i]) + wordlist[i].length] == " " || gg4_rr4s.indexOf((wordlist[
+                                    i]) + wordlist[i].length) < 0)) {
+
+                                if (different == 1) {
+                                    (rr4[rr4list + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr4[rr4list + i];
+                                    responsiveVoice.speak(rr4[rr4list + i]);
+                                } else {
+                                    (rr4[rr4list]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr4[rr4list];
+                                    responsiveVoice.speak(rr4[rr4list]);
+                                }
+                                empty.push(main[i]);
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        i = i + 1;
+                    }
+                }
+
+
+
+
+
+
+
                 var empty = [];
                 var i = 0;
                 var gr2_rr2s = "";
@@ -2441,6 +2484,19 @@
                     }
                 }
                 gr11(gr11Words, userQ, 0, 0);
+                if (found == false) {
+                    i = 0;
+                    while (i < listdata.length) {
+                        if (zeta.indexOf(listdata[i]) !== -1) {
+                            (ansdata[i]);
+                            responsiveVoice.speak(ansdata[i]);
+                            found = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+                gg4(gg4Words, userQ, 0, 0);
                 if (found == false) {
                     i = 0;
                     while (i < listdata.length) {
