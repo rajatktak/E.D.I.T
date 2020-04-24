@@ -757,7 +757,8 @@
                                     const wordd = finalTranscripts.slice();
                                     responsiveVoice.speak("Here is what i found in your contact for " + wordd);
                                     let link = 'tel:' + wordd;
-                                    window.open(link, '_blank');
+                                    window.location.href = link;
+
 
                                 }
                                 if (finalTranscripts.substring(0, 4) === "play") {
