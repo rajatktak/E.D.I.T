@@ -754,8 +754,9 @@
 
                                 }
                                 if (finalTranscripts.substring(0, 4) === "call") {
-                                    const wordd = finalTranscripts.slice();
+                                    const wordd = finalTranscripts.slice(4);
                                     responsiveVoice.speak("Here is what i found in your contact for " + wordd);
+                                    alert(wordd);
                                     let link = 'tel:' + wordd;
                                     window.location.href = link;
 
