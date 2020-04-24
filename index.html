@@ -294,7 +294,37 @@
     </head>
 
 
-    <body onload=" PressButton()">
+    <body onload="aabbccc()">
+        <script>
+            function aabbccc() {
+                alert("aaaaa");
+            }
+        </script>
+
+        <script>
+            // PressButton()
+
+            function doesConnectionExist() {
+                var xhr = new XMLHttpRequest();
+                var file = "https://www.kirupa.com/blank.png";
+                var randomNum = Math.round(Math.random() * 10000);
+
+                xhr.open('HEAD', file + "?rand=" + randomNum, true);
+                xhr.send();
+
+                xhr.addEventListener("readystatechange", processRequest, false);
+
+                function processRequest(e) {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status >= 200 && xhr.status < 304) {
+                            alert("connection exists!");
+                        } else {
+                            alert("connection doesn't exist!");
+                        }
+                    }
+                }
+            }
+        </script>
         <audio id="myAudio">
             <source src="sss.ogg" type="audio/ogg">
             <source src="sss.mp3" type="audio/mpeg">
@@ -447,18 +477,16 @@
         <center>
 
 
-            <a href="#" class="switch">Full Screen </a>
-            <a href="tel:12223334444">222-333-4444</a>
+            <!-- <a href="tel:12223334444">222-333-4444</a> -->
             <p>
                 <form action="javascript:question();" id="myy" type="hidden">
                     <input type="hidden" id="uq" />
 
-                    <input type="submit" id="BUTTON" href="javascript:;"></form>
-                <button class="switch">On / Off</button>
+                    <input type="submit" id="BUTTON" href="javascript:;" style="background:transparent;border:none"
+                        value=""></form>
 
                 <div id="uqq"></div>
                 <div class="inner">
-                    <h1 style="z-index:99999999999999999;color:#fff;">yyttttt</h1>
                     <canvas id='bbttnn' style="font-family: 'Orbitron', sans-serif;">
                     </canvas>
                 </div>
@@ -722,6 +750,13 @@
                                     const wordd = finalTranscripts.slice(6);
                                     responsiveVoice.speak("Here is what i found on google about " + wordd);
                                     let link = 'https://www.google.com/search?q=' + wordd;
+                                    window.open(link, '_blank');
+
+                                }
+                                if (finalTranscripts.substring(0, 4) === "call") {
+                                    const wordd = finalTranscripts.slice();
+                                    responsiveVoice.speak("Here is what i found in your contact for " + wordd);
+                                    let link = 'tel:' + wordd;
                                     window.open(link, '_blank');
 
                                 }
