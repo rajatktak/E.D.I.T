@@ -729,6 +729,7 @@
                             speechRecognizer.lang = 'en-US';
                             speechRecognizer.start();
 
+
                             var finalTranscripts = '';
 
                             speechRecognizer.onresult = function (event) {
@@ -736,6 +737,13 @@
                                 for (var i = event.resultIndex; i < event.results.length; i++) {
                                     var transcript = event.results[i][0].transcript;
                                     transcript.replace("\n", "<br>");
+                                    var mobileRepeatBug = (current == 1 && transcript == event.results[0][0]
+                                        .transcript);
+
+                                    if (!mobileRepeatBug) {
+                                        finalTranscript += transcript;
+
+                                    }
                                     if (event.results[i].isFinal) {
                                         finalTranscripts += transcript;
 
