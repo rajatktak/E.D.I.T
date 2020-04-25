@@ -737,14 +737,16 @@
 
                             speechRecognizer.onresult = function (event) {
 
-                                for (var i = event.resultIndex; i < event.results.length; i++) {
+                                for (var i = 0; i < event.results.length; i++) {
+
+                                    result = event.results[i];
                                     var transcript = event.results[i][0].transcript;
 
 
 
 
                                     if (event.results[i].isFinal) {
-                                        finalTranscripts += transcript;
+                                        finalTranscripts = finalTranscripts.trim() + ' ' + result[0].transcript;
 
                                     }
                                 }
