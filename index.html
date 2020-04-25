@@ -733,21 +733,20 @@
                             speechRecognizer.start();
                             speechRecognizer.maxAlternatives = 1;
 
+
                             var finalTranscripts = '';
 
                             speechRecognizer.onresult = function (event) {
-
+                                var interimTranscripts = '';
                                 for (var i = 0; i < event.results.length; i++) {
-
-
-                                    var transcript = event.results[0][0].transcript;
+                                    var transcript = event.results[i][0].transcript;
 
 
 
 
                                     if (event.results[i].isFinal) {
-                                        finalTranscripts = transcript;
-                                        speechRecognizer.stop();
+                                        finalTranscripts += transcript;
+
                                     }
                                 }
 
@@ -770,6 +769,49 @@
 
 
                                 }
+
+
+                                if (finalTranscripts.substring(0, 9) === "status in") {
+                                    var wordd = finalTranscripts.slice(10);
+                                    alert(wordd);
+
+                                    var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange = function () {
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            var myoobbjj = [];
+                                            var oobbjj = JSON.parse(this.responseText).statewise;
+                                            var results = [];
+                                            var state = wordd;
+                                            for (var i = 0; i < oobbjj.length; i++) {
+                                                if (oobbjj[i]) {
+                                                    if (oobbjj[i].state == state) {
+                                                        // responsiveVoice.speak('State Name  ' + oobbjj[i].state +
+                                                        //     ' \n Statecode  ' + oobbjj[i].statecode +
+                                                        //     '\n Total Confirmed cases ' + oobbjj[i]
+                                                        //     .confirmed +
+                                                        //     '\n Total Active cases  ' + oobbjj[i].active +
+                                                        //     '\n Total Recovered cases  ' + oobbjj[i]
+                                                        //     .recovered +
+                                                        //     '\n Total Deceased cases  ' + oobbjj[i].deaths);
+                                                        alert('State Name  ' + oobbjj[i].state +
+                                                            ' \n Statecode  ' + oobbjj[i].statecode +
+                                                            '\n Total Confirmed cases ' + oobbjj[i]
+                                                            .confirmed +
+                                                            '\n Total Active cases  ' + oobbjj[i].active +
+                                                            '\n Total Recovered cases  ' + oobbjj[i]
+                                                            .recovered +
+                                                            '\n Total Deceased cases  ' + oobbjj[i].deaths);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    };
+
+                                    xmlhttp.open("GET", "https://api.covid19india.org/data.json", true);
+                                    xmlhttp.send();
+
+                                }
+
                                 if (finalTranscripts.substring(0, 4) === "play") {
                                     const worddd = finalTranscripts.slice(4);
                                     responsiveVoice.speak("Here is what i found on Youtube about " + worddd);
@@ -1738,37 +1780,6 @@
                     while (i <= gg44_rr44s.length) {
                         if (gg44_rr44s.indexOf(wordlist[i]) > -1) {
 
-                            var xmlhttp = new XMLHttpRequest();
-                            xmlhttp.onreadystatechange = function () {
-                                if (this.readyState == 4 && this.status == 200) {
-                                    var myoobbjj = [];
-                                    var oobbjj = JSON.parse(this.responseText).statewise;
-                                    var results = [];
-                                    var searchField = "statecode";
-                                    var searchVal = "RJ";
-                                    for (var i = 0; i < oobbjj.length; i++) {
-                                        if (oobbjj[i]) {
-                                            if (oobbjj[i].statecode == "RJ") {
-                                                responsiveVoice.speak('State Name  ' + oobbjj[i].state +
-                                                    ' \n Statecode  ' + oobbjj[i].statecode +
-                                                    '\n Total Confirmed cases ' + oobbjj[i].confirmed +
-                                                    '\n Total Active cases  ' + oobbjj[i].active +
-                                                    '\n Total Recovered cases  ' + oobbjj[i].recovered +
-                                                    '\n Total Deceased cases  ' + oobbjj[i].deaths);
-                                                alert('State Name  ' + oobbjj[i].state +
-                                                    ' \n Statecode  ' + oobbjj[i].statecode +
-                                                    '\n Total Confirmed cases ' + oobbjj[i].confirmed +
-                                                    '\n Total Active cases  ' + oobbjj[i].active +
-                                                    '\n Total Recovered cases  ' + oobbjj[i].recovered +
-                                                    '\n Total Deceased cases  ' + oobbjj[i].deaths);
-                                            }
-                                        }
-                                    }
-                                }
-                            };
-
-                            xmlhttp.open("GET", "https://api.covid19india.org/data.json", true);
-                            xmlhttp.send();
                             // rr44 = [staten];
                             responsiveVoice.speak(staten)
                             if ((gg44_rr44s[gg44_rr44s.indexOf(wordlist[i]) - 1] == " " ||
