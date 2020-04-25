@@ -1723,6 +1723,95 @@
 
                 var empty = [];
                 var i = 0;
+                var gg44_rr44s = "";
+                var found = false;
+                var gg44Words = "Rajasthan";
+                var fivequestions = [];
+                var rr44 = [];
+                wow();
+
+
+                function gg44(wordlist, main, rr44list, different) {
+                    empty = [];
+                    i = 0;
+                    gg44_rr44s = main.join(" ");
+                    while (i <= gg44_rr44s.length) {
+                        if (gg44_rr44s.indexOf(wordlist[i]) > -1) {
+
+                            var xmlhttp = new XMLHttpRequest();
+                            xmlhttp.onreadystatechange = function () {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    var myoobbjj = [];
+                                    var oobbjj = JSON.parse(this.responseText).statewise;
+                                    var results = [];
+                                    var searchField = "statecode";
+                                    var searchVal = "RJ";
+                                    for (var i = 0; i < oobbjj.length; i++) {
+                                        if (oobbjj[i]) {
+                                            if (oobbjj[i].statecode == "RJ") {
+                                                responsiveVoice.speak('State Name  ' + oobbjj[i].state +
+                                                    ' \n Statecode  ' + oobbjj[i].statecode +
+                                                    '\n Total Confirmed cases ' + oobbjj[i].confirmed +
+                                                    '\n Total Active cases  ' + oobbjj[i].active +
+                                                    '\n Total Recovered cases  ' + oobbjj[i].recovered +
+                                                    '\n Total Deceased cases  ' + oobbjj[i].deaths);
+                                                alert('State Name  ' + oobbjj[i].state +
+                                                    ' \n Statecode  ' + oobbjj[i].statecode +
+                                                    '\n Total Confirmed cases ' + oobbjj[i].confirmed +
+                                                    '\n Total Active cases  ' + oobbjj[i].active +
+                                                    '\n Total Recovered cases  ' + oobbjj[i].recovered +
+                                                    '\n Total Deceased cases  ' + oobbjj[i].deaths);
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+
+                            xmlhttp.open("GET", "https://api.covid19india.org/data.json", true);
+                            xmlhttp.send();
+                            // rr44 = [staten];
+                            responsiveVoice.speak(staten)
+                            if ((gg44_rr44s[gg44_rr44s.indexOf(wordlist[i]) - 1] == " " ||
+                                    gg44_rr44s
+                                    .indexOf(wordlist[i]) - 1 < 0) && (gg44_rr44s[gg44_rr44s
+                                        .indexOf(
+                                            wordlist[i]) + wordlist[i].length] == " " || gg44_rr44s
+                                    .indexOf((wordlist[
+                                        i]) + wordlist[i].length) < 0)) {
+
+                                if (different == 1) {
+                                    (rr44[rr44list + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr44[rr44list + i];
+                                    responsiveVoice.speak(rr44[rr44list + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    finalTranscripts = '';
+                                    rr44.innerHTML = '';
+                                    document.getElementById('uq').value = '';
+                                    document.getElementById("myy").submit();
+                                } else {
+                                    (rr44[rr44list]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = rr44[rr44list];
+                                    responsiveVoice.speak(rr44[rr44list]);
+                                }
+                                empty.push(main[i]);
+                                found = true;
+                                break;
+                            }
+                        }
+                        i = i + 1;
+                    }
+
+                }
+
+
+
+
+
+
+                var empty = [];
+                var i = 0;
                 var gg3_rr3s = "";
                 var found = false;
                 var gg3Words = ["system", "system check", "system details"];
@@ -2542,6 +2631,19 @@
                     }
                 }
                 gg4(gg4Words, userQ, 0, 0);
+                if (found == false) {
+                    i = 0;
+                    while (i < listdata.length) {
+                        if (zeta.indexOf(listdata[i]) !== -1) {
+                            (ansdata[i]);
+                            responsiveVoice.speak(ansdata[i]);
+                            found = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+                gg44(gg44Words, userQ, 0, 0);
                 if (found == false) {
                     i = 0;
                     while (i < listdata.length) {
