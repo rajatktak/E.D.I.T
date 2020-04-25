@@ -735,10 +735,15 @@
                             speechRecognizer.onresult = function (event) {
                                 var interimTranscripts = '';
                                 for (var i = 0; i < event.results.length; i++) {
-                                    var transcript = event.results[0][0].transcript;
+                                    var transcript = event.results[i][0].transcript;
                                     transcript.replace("\n", "<br>");
 
+                                    var mobileRepeatBug = (i == 1 && transcript == event.results[0][0].transcript);
 
+                                    if (!mobileRepeatBug) {
+                                        finalTranscripts += transcript;
+
+                                    }
 
                                     if (event.results[i].isFinal) {
                                         finalTranscripts += transcript;
