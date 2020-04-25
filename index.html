@@ -739,15 +739,15 @@
 
                                 for (var i = 0; i < event.results.length; i++) {
 
-                                    result = event.results[0];
-                                    // var transcript = event.results[i][0].transcript;
+
+                                    var transcript = event.results[0][0].transcript;
 
 
 
 
                                     if (event.results[i].isFinal) {
-                                        finalTranscripts = event.results[0][0].transcript;
-
+                                        finalTranscripts = transcript;
+                                        speechRecognizer.stop();
                                     }
                                 }
 
@@ -1725,7 +1725,7 @@
                 var i = 0;
                 var gg44_rr44s = "";
                 var found = false;
-                var gg44Words = ["facebook"];
+                var gg44Words = ["rajasthan"];
                 var fivequestions = [];
                 var rr44 = [];
                 wow();
