@@ -771,6 +771,62 @@
                                 }
 
 
+                                // if (finalTranscripts.substring(0, 9) === "status of" && finalTranscripts.split(' ')
+                                //     .slice(3, 4) == "in") {
+
+                                //     //&& finalTranscripts.split(' ').slice(3, 4) === "in"
+                                //     var sttb = finalTranscripts.split(' ').slice(4, 5);
+                                //     // var sttf = sttb.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() +
+                                //     //     s
+                                //     //     .substring(1)).join(' ');
+                                //     var distb = finalTranscripts.split(' ').slice(2, 3);
+                                //     // var dist = distb.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() +
+                                //     //     s
+                                //     //     .substring(1)).join(' ');
+                                //     responsiveVoice.speak("you got it right ");
+                                //     alert(distb + sttb);
+                                //     var xmlhttp = new XMLHttpRequest();
+                                //     xmlhttp.onreadystatechange = function () {
+                                //         if (this.readyState == 4 && this.status == 200) {
+
+                                //             var bbjjstate = JSON.parse(this.responseText).state;
+                                //             // alert('aaa');
+                                //             for (var i = 0; i < bbjjstate.length; i++) {
+                                //                 alert(bbjjstate[i]);
+                                //                 if (bbjjstate[i]) {
+                                //                     if (bbjjstate[i] == sttb) {
+                                //                         alert(bbjjstate[i]);
+                                //                         // var bbjj = JSON.parse(this.responseText).districtData;
+                                //                         for (var i = 0; i < bbjj.length; i++) {
+                                //                             if (bbjj[i]) {
+                                //                                 if (bbjj[i].district == distb) {
+                                //                                     alert('State Name  ' + bbjj[i].district
+                                //                                         // ' \n Statecode  ' + bbjj[i].statecode +
+                                //                                         // '\n Total Confirmed cases ' + bbjj[i]
+                                //                                         // .confirmed + '\n Total Active cases ' +
+                                //                                         // bbjj[i]
+                                //                                         // .active + '\n Total Recovered cases ' +
+                                //                                         // bbjj[i]
+                                //                                         // .recovered +
+                                //                                         // '\n Total Deceased cases ' + bbjj[
+                                //                                         //     i]
+                                //                                         // .deaths);
+                                //                                     );
+                                //                                 }
+                                //                             }
+                                //                         }
+                                //                     }
+                                //                 }
+                                //             }
+                                //         }
+                                //     };
+                                // xmlhttp.open("GET",
+                                //     "https://api.covid19india.org/v2/state_district_wise.json",
+                                //     true);
+                                // xmlhttp.send();
+
+
+                                // }
 
 
 
@@ -798,7 +854,7 @@
                                 }
                                 setTimeout(function () {
                                     speechRecognizer.stop();
-                                }, 800);
+                                }, 1000);
 
 
                             };
@@ -1730,9 +1786,17 @@
                 var i = 0;
                 var gg44_rr44s = "";
                 var found = false;
-                var gg44Words = ["haryana", "rajasthan", "gujarat", "goa", "delhi", "punjab", "maharashtra", "bihar",
-                    "chandigarh", "jharkhand", "himachal pradesh"
+                var ggra = ['goa'];
+                var gg44Words = ["haryana", "gujarat", "goa", "delhi", "punjab", "maharashtra", "bihar",
+                    "chandigarh", "jharkhand", "himachal pradesh", "rajasthan", "andhra pradesh",
+                    "arunachal pradesh", "assam",
+                    "jammu and kashmir", "karnataka", "telangana", "madhya pradesh", "manipur", "meghalaya",
+                    "mizoram", "kerala",
+                    "nagaland", "odisha",
+                    "ladak", "puducherry",
+                    "sikkim", "tamil nadu", "telangana", "tripura", "uttarakhand", "uttar pradesh", "west bengal",
                 ];
+
                 var fivequestions = [];
                 var rr44 = [];
                 wow();
@@ -1742,7 +1806,7 @@
                     empty = [];
                     i = 0;
                     gg44_rr44s = main.join(" ");
-                    while (i <= gg44_rr44s.length) {
+                    while (i <= 40) {
                         if (gg44_rr44s.indexOf(wordlist[i]) > -1) {
                             // var state = wordlist[i].charAt(0).toUpperCase() + wordlist[i].slice(1);
 
@@ -1774,10 +1838,12 @@
                                                     ' \n Statecode  ' + oobbjj[i].statecode +
                                                     '\n Total Confirmed cases ' + oobbjj[i]
                                                     .confirmed +
+                                                    "\n Today's Confirmed cases  " + oobbjj[i].deltaconfirmed +
                                                     '\n Total Active cases  ' + oobbjj[i].active +
-                                                    '\n Total Recovered cases  ' + oobbjj[i]
-                                                    .recovered +
-                                                    '\n Total Deceased cases  ' + oobbjj[i].deaths);
+                                                    '\n Total Recovered cases  ' + oobbjj[i].recovered +
+                                                    "\n Today's Recovered cases  " + oobbjj[i].deltarecovered +
+                                                    '\n Total Deceased cases  ' + oobbjj[i].deaths +
+                                                    "\n Today's Deceased cases  " + oobbjj[i].deltadeaths);
                                             }
                                         }
                                     }
