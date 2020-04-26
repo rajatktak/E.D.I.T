@@ -477,7 +477,7 @@
         <center>
 
 
-            <a href="tel:12223334444">cc</a>
+            <a href="tel:12223334444">Rajat</a>
             <p>
                 <form action="javascript:question();" id="myy" type="hidden">
                     <input type="hidden" id="uq" />
@@ -771,46 +771,8 @@
                                 }
 
 
-                                if (finalTranscripts.substring(0, 6) === "status") {
-                                    var wordd = finalTranscripts.slice(7);
 
 
-                                    var xmlhttp = new XMLHttpRequest();
-                                    xmlhttp.onreadystatechange = function () {
-                                        if (this.readyState == 4 && this.status == 200) {
-                                            var myoobbjj = [];
-                                            var oobbjj = JSON.parse(this.responseText).statewise;
-                                            var results = [];
-                                            var state = wordd;
-                                            for (var i = 0; i < oobbjj.length; i++) {
-                                                if (oobbjj[i]) {
-                                                    if (oobbjj[i].state == state) {
-                                                        // responsiveVoice.speak('State Name  ' + oobbjj[i].state +
-                                                        //     ' \n Statecode  ' + oobbjj[i].statecode +
-                                                        //     '\n Total Confirmed cases ' + oobbjj[i]
-                                                        //     .confirmed +
-                                                        //     '\n Total Active cases  ' + oobbjj[i].active +
-                                                        //     '\n Total Recovered cases  ' + oobbjj[i]
-                                                        //     .recovered +
-                                                        //     '\n Total Deceased cases  ' + oobbjj[i].deaths);
-                                                        alert('State Name  ' + oobbjj[i].state +
-                                                            ' \n Statecode  ' + oobbjj[i].statecode +
-                                                            '\n Total Confirmed cases ' + oobbjj[i]
-                                                            .confirmed +
-                                                            '\n Total Active cases  ' + oobbjj[i].active +
-                                                            '\n Total Recovered cases  ' + oobbjj[i]
-                                                            .recovered +
-                                                            '\n Total Deceased cases  ' + oobbjj[i].deaths);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    };
-
-                                    xmlhttp.open("GET", "https://api.covid19india.org/data.json", true);
-                                    xmlhttp.send();
-
-                                }
 
                                 if (finalTranscripts.substring(0, 4) === "play") {
                                     const worddd = finalTranscripts.slice(4);
@@ -841,6 +803,7 @@
 
                             };
                         } else {}
+
                     }
                 </script>
 
@@ -1767,7 +1730,9 @@
                 var i = 0;
                 var gg44_rr44s = "";
                 var found = false;
-                var gg44Words = ["rajasthan"];
+                var gg44Words = ["haryana", "rajasthan", "gujarat", "goa", "delhi", "punjab", "maharashtra", "bihar",
+                    "chandigarh", "jharkhand", "himachal pradesh"
+                ];
                 var fivequestions = [];
                 var rr44 = [];
                 wow();
@@ -1779,6 +1744,49 @@
                     gg44_rr44s = main.join(" ");
                     while (i <= gg44_rr44s.length) {
                         if (gg44_rr44s.indexOf(wordlist[i]) > -1) {
+                            // var state = wordlist[i].charAt(0).toUpperCase() + wordlist[i].slice(1);
+
+                            var state = wordlist[i].toLowerCase()
+                                .split(' ')
+                                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                                .join(' ');
+
+
+                            var xmlhttp = new XMLHttpRequest();
+                            xmlhttp.onreadystatechange = function () {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    var myoobbjj = [];
+                                    var oobbjj = JSON.parse(this.responseText).statewise;
+                                    var results = [];
+
+                                    for (var i = 0; i < oobbjj.length; i++) {
+                                        if (oobbjj[i]) {
+                                            if (oobbjj[i].state == state) {
+                                                // responsiveVoice.speak('State Name  ' + oobbjj[i].state +
+                                                //     ' \n Statecode  ' + oobbjj[i].statecode +
+                                                //     '\n Total Confirmed cases ' + oobbjj[i]
+                                                //     .confirmed +
+                                                //     '\n Total Active cases  ' + oobbjj[i].active +
+                                                //     '\n Total Recovered cases  ' + oobbjj[i]
+                                                //     .recovered +
+                                                //     '\n Total Deceased cases  ' + oobbjj[i].deaths);
+                                                alert('State Name  ' + oobbjj[i].state +
+                                                    ' \n Statecode  ' + oobbjj[i].statecode +
+                                                    '\n Total Confirmed cases ' + oobbjj[i]
+                                                    .confirmed +
+                                                    '\n Total Active cases  ' + oobbjj[i].active +
+                                                    '\n Total Recovered cases  ' + oobbjj[i]
+                                                    .recovered +
+                                                    '\n Total Deceased cases  ' + oobbjj[i].deaths);
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+
+                            xmlhttp.open("GET", "https://api.covid19india.org/data.json", true);
+                            xmlhttp.send();
+
 
                             // rr44 = [staten];
                             responsiveVoice.speak(staten)
