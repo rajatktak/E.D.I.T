@@ -280,7 +280,7 @@
                 color: #fff;
                 -moz-box-shadow: inset 0 0 10px cyan;
                 -webkit-box-shadow: inset 0 0 10px #bbb;
-                box-shadow: inset 0 0 10px red;
+                box-shadow: inset 0 0 10px cyan;
                 -ms-animation: blinking-inner-glow 2s infinite;
                 -o-animation: blinking-inner-glow 2s infinite;
                 -webkit-animation: blinking-inner-glow 2s infinite;
@@ -1828,24 +1828,38 @@
                                     for (var i = 0; i < oobbjj.length; i++) {
                                         if (oobbjj[i]) {
                                             if (oobbjj[i].state == state) {
-                                                // responsiveVoice.speak('State Name  ' + oobbjj[i].state +
-                                                //     ' \n Statecode  ' + oobbjj[i].statecode +
-                                                //     '\n Total Confirmed cases ' + oobbjj[i]
-                                                //     .confirmed +
-                                                //     '\n Total Active cases  ' + oobbjj[i].active +
-                                                //     '\n Total Recovered cases  ' + oobbjj[i]
-                                                //     .recovered +
-                                                //     '\n Total Deceased cases  ' + oobbjj[i].deaths);
+                                                responsiveVoice.speak('State Name  ' + oobbjj[i].state +
+                                                    ' \n Statecode  ' + oobbjj[i].statecode +
+                                                    '\n Total Confirmed cases ' + oobbjj[i]
+                                                    .confirmed +
+                                                    "\n Today's Confirmed cases  " + oobbjj[i]
+                                                    .deltaconfirmed +
+                                                    '\n Total Active cases  ' + oobbjj[i].active +
+                                                    '\n Total Recovered cases  ' + oobbjj[i]
+                                                    .recovered +
+                                                    "\n Today's Recovered cases  " + oobbjj[i]
+                                                    .deltarecovered +
+                                                    '\n Total Deceased cases  ' + oobbjj[i].deaths +
+                                                    "\n Today's Deceased cases  " + oobbjj[i]
+                                                    .deltadeaths);
+
                                                 alert('State Name  ' + oobbjj[i].state +
                                                     ' \n Statecode  ' + oobbjj[i].statecode +
                                                     '\n Total Confirmed cases ' + oobbjj[i]
                                                     .confirmed +
-                                                    "\n Today's Confirmed cases  " + oobbjj[i].deltaconfirmed +
+                                                    "\n Today's Confirmed cases  " + oobbjj[i]
+                                                    .deltaconfirmed +
                                                     '\n Total Active cases  ' + oobbjj[i].active +
-                                                    '\n Total Recovered cases  ' + oobbjj[i].recovered +
-                                                    "\n Today's Recovered cases  " + oobbjj[i].deltarecovered +
+                                                    '\n Total Recovered cases  ' + oobbjj[i]
+                                                    .recovered +
+                                                    "\n Today's Recovered cases  " + oobbjj[i]
+                                                    .deltarecovered +
                                                     '\n Total Deceased cases  ' + oobbjj[i].deaths +
-                                                    "\n Today's Deceased cases  " + oobbjj[i].deltadeaths);
+                                                    "\n Today's Deceased cases  " + oobbjj[i]
+                                                    .deltadeaths);
+
+
+
                                             }
                                         }
                                     }
