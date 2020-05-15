@@ -280,7 +280,7 @@
                 color: #fff;
                 -moz-box-shadow: inset 0 0 10px cyan;
                 -webkit-box-shadow: inset 0 0 10px #bbb;
-                box-shadow: inset 0 0 10px cyan;
+                box-shadow: inset 0 0 10px red;
                 -ms-animation: blinking-inner-glow 2s infinite;
                 -o-animation: blinking-inner-glow 2s infinite;
                 -webkit-animation: blinking-inner-glow 2s infinite;
@@ -739,9 +739,10 @@
                             speechRecognizer.onresult = function (event) {
                                 var interimTranscripts = '';
                                 for (var i = 0; i < event.results.length; i++) {
+                                    var i = event.resultIndex;
                                     var transcript = event.results[i][0].transcript;
 
-
+                                    finalTranscripts += '';
 
 
                                     if (event.results[i].isFinal) {
