@@ -280,7 +280,7 @@
                 color: #fff;
                 -moz-box-shadow: inset 0 0 10px cyan;
                 -webkit-box-shadow: inset 0 0 10px #bbb;
-                box-shadow: inset 0 0 10px red;
+                box-shadow: inset 0 0 10px cyan;
                 -ms-animation: blinking-inner-glow 2s infinite;
                 -o-animation: blinking-inner-glow 2s infinite;
                 -webkit-animation: blinking-inner-glow 2s infinite;
@@ -607,7 +607,8 @@
                             p.vy += p.ay;
                             p.vz += p.az;
                             p.x += p.vx;
-                            p.y += p.vy;
+                            file: ///home/rajat/Desktop/PA/index.html
+                                p.y += p.vy;
                             p.z += p.vz;
                             if (mouse.down) {
                                 p.az = -0.5;
@@ -728,7 +729,7 @@
                         if ('webkitSpeechRecognition' in window) {
                             var speechRecognizer = new webkitSpeechRecognition();
                             speechRecognizer.continuous = true;
-                            speechRecognizer.interimResults = true;
+                            //speechRecognizer.interimResults = true;
                             speechRecognizer.lang = 'en-US';
                             speechRecognizer.start();
                             speechRecognizer.maxAlternatives = 1;
