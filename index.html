@@ -280,7 +280,7 @@
                 color: #fff;
                 -moz-box-shadow: inset 0 0 10px cyan;
                 -webkit-box-shadow: inset 0 0 10px #bbb;
-                box-shadow: inset 0 0 10px yellow;
+                box-shadow: inset 0 0 10px cyan;
                 -ms-animation: blinking-inner-glow 2s infinite;
                 -o-animation: blinking-inner-glow 2s infinite;
                 -webkit-animation: blinking-inner-glow 2s infinite;
@@ -728,7 +728,7 @@
 
                         if ('webkitSpeechRecognition' in window) {
                             var speechRecognizer = new webkitSpeechRecognition();
-                            speechRecognizer.continuous = true;
+                            // speechRecognizer.continuous = true;
                             //speechRecognizer.interimResults = true;
                             speechRecognizer.lang = 'en-US';
                             speechRecognizer.start();
