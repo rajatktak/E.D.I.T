@@ -1,0 +1,21 @@
+{
+    "name": "E.D.I.T.H",
+    "short_name": "E.D.I.T.H",
+    "lang": "en",
+    "start_url": "/",
+    "display": "fullscreen",
+    "theme_color": "#c2f442",
+    "icons": [{
+            "src": "",
+            "sizes": "64x64"
+        },
+        {
+            "src": "",
+            "sizes": "128x128"
+        },
+        {
+            "src": "",
+            "sizes": "512x512"
+        }
+    ]
+}
