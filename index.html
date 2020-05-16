@@ -487,11 +487,25 @@
                         window.setTimeout(callback, 1000 / 60);
                     };
             })();
+            var obj = [{
+                "name": "Rajat",
+                "phone": "8890020999"
+            }, {
+                "name": "father Sahab",
+                "phone": "9214687311"
+            }, {
+                "name": "mom",
+                "phone": "8769181000"
+            }];
         </script>
-        <enter>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 
 
-            <a href="tel:12223334444">Rajat</a>
+
+        <center>
+
+
+
             <p>
                 <form action="javascript:question();" id="myy" type="hidden">
                     <input type="hidden" id="uq" />
@@ -777,12 +791,17 @@
 
                                 }
                                 if (finalTranscripts.substring(0, 4) === "call") {
-                                    const wordd = finalTranscripts.slice(4);
+                                    const wordd = finalTranscripts.slice(5);
                                     responsiveVoice.speak("Here is what i found in your contact for " + wordd);
                                     alert(wordd);
-                                    let link = 'tel:' + wordd;
-                                    window.location.href = link;
 
+                                    for (var i = 0; i < obj.length; i++) {
+                                        if (obj[i].name == wordd) {
+                                            window.location.href = "tel:" + obj[i].phone;
+
+                                        }
+
+                                    }
 
                                 }
 
@@ -939,7 +958,7 @@
 
 <gcse:searchresults></gcse:searchresults>-->
             </div>
-        </enter>
+        </center>
 
         <canvas id="canvas"></canvas>
         <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
