@@ -5,6 +5,7 @@
 
         <title>Rajat</title>
         <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+        <link rel="manifest" href="/manifest.json">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -294,9 +295,19 @@
     </head>
 
 
-    <body>
+    <body id="aaabbbaaa" onshow="aaaa()">
 
-
+        <script>
+            function isOnScreen(element) {
+                var curPos = element.offset();
+                var curTop = curPos.top;
+                var screenHeight = $(window).height();
+                return (curTop > screenHeight) ? false : true;
+            }
+            if (isOnScreen($('#cccaa'))) {
+                alert("ggg");
+            };
+        </script>
         <script>
             // PressButton()
 
@@ -326,13 +337,19 @@
             <source src="sss.mp3" type="audio/mpeg">
 
         </audio>
-        <canvas id="cccaa" style="height:100vh;"></canvas>
-        <button id="goFS">Go fullscreen</button>
+        <canvas id="cccaa" onshow="aaaa()" style="height:100vh;"></canvas>
+        <button id="goFS" onclick="aaaa()">Go fullscreen</button>
         <script>
-            var goFS = document.getElementById("goFS");
-            goFS.addEventListener("click", function () {
-                document.body.requestFullscreen();
-            }, false);
+            function aaaa() {
+
+                document.body.Fullscreen();
+            }
+            $('body').onScreen({
+                function () {
+
+                    document.body.requestFullscreen();
+                }
+            })
         </script>
 
         <script>
