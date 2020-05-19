@@ -1074,6 +1074,10 @@
                                 }
                                 setTimeout(function () {
                                     speechRecognizer.stop();
+                                    if (!finalTranscripts) {
+                                        responsiveVoice.speak('sorry Sir please speak loude it');
+                                    }
+
                                 }, 1000);
 
 
