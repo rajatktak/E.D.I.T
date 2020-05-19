@@ -347,7 +347,7 @@
             style="z-index:999999999999999999999999999999999999999999999999999;background:rgba(0,0,0,0.3);">
             <div class="modal-dialog">
                 <div class="modal-content"
-                    style="background:rgba(0,0,0,0.3);border:none;color:cyan;box-shadow:4px 60px 120px rgba(0,255,255,0.3),inset 4px 40px 80px rgba(0,255,255,0.2)">
+                    style="background:rgba(0,0,0,0.3);border:1px solid cyan;color:cyan;box-shadow:4px 60px 120px rgba(0,255,255,0.3),inset 4px 40px 80px rgba(0,255,255,0.2)">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
@@ -899,21 +899,21 @@
                                                             document.getElementById("head").innerHTML =
                                                                 "CORONA UPDATE";
                                                             document.getElementById("showw").innerHTML =
-                                                                "District " + bbjjstatecc[a].district +
-                                                                "<br> State " + sttb +
-                                                                "<br> Total Confirmed Cases " + bbjjstatecc[a]
+                                                                "District : " + bbjjstatecc[a].district +
+                                                                "<br> State : " + sttb +
+                                                                "<br> Total Confirmed Cases : " + bbjjstatecc[a]
                                                                 .confirmed +
-                                                                "<br> Total Active Cases " + bbjjstatecc[a]
+                                                                "<br> Total Active Cases : " + bbjjstatecc[a]
                                                                 .active +
-                                                                "<br>Total Recovered Cases " + bbjjstatecc[a]
+                                                                "<br>Total Recovered Cases : " + bbjjstatecc[a]
                                                                 .recovered +
-                                                                "<br>Today's Confirmed Cases " + ooaa
+                                                                "<br>Today's Confirmed Cases : " + ooaa
                                                                 .confirmed +
-                                                                "<br>Today's Recovered Cases " +
+                                                                "<br>Today's Recovered Cases : " +
                                                                 ooaa.recovered +
 
 
-                                                                "<br>Today's Deceased Cases " + ooaa.deceased;
+                                                                "<br>Today's Deceased Cases : " + ooaa.deceased;
 
                                                         }
                                                     }
@@ -973,6 +973,80 @@
 
 
 
+                                if (finalTranscripts == "current temperature") {
+
+
+                                    function getLocation() {
+                                        if (navigator.geolocation) {
+                                            navigator.geolocation.getCurrentPosition(showPosition);
+                                        } else {
+                                            x.innerHTML = "Geolocation is not supported by this browser.";
+                                        }
+                                    }
+                                    getLocation();
+
+                                    function showPosition(position) {
+
+                                        var lat = position.coords.latitude;
+                                        var lon = position.coords.longitude;
+                                        aaa(lat, lon);
+                                    }
+
+                                    function aaa(lat, lon) {
+
+                                        const link =
+                                            "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/fd9d9c6418c23d94745b836767721ad1/" +
+                                            lat + "," + lon;
+
+
+                                        var request = new XMLHttpRequest();
+                                        request.open('GET', link, true);
+                                        request.onload = function () {
+                                            var obj = JSON.parse(this.response);
+                                            if (request.status >= 200 && request.status < 400) {
+                                                var tempf = obj.currently.temperature;
+                                                var tempa = obj.currently.apparentTemperature;
+                                                var tempb = obj.currently.cloudCover;
+                                                var tempc = obj.currently.uvIndex;
+                                                var tempd = obj.currently.visibility;
+                                                var tempe = obj.currently.ozone;
+                                                var tempccc = (tempa - 32) / 1.8;
+                                                var tempaa = tempccc.toFixed(2);
+                                                var sum = obj.hourly.summary;
+                                                var tempcc = (tempf - 32) / 1.8;
+                                                var temp = tempcc.toFixed(2);
+
+                                                responsiveVoice.speak("Current Temperature : " +
+                                                    temp + "DEGREE CELSIUS\n Apparent Temperature : " +
+                                                    tempaa +
+                                                    "	DEGREE CELSIUS\nToday's Summery : " + sum +
+                                                    "\nCloud Cover : " + tempb +
+                                                    "\nUV Index : " + tempc + "\nVisibility : " + tempd +
+                                                    "\n Ozone : " +
+                                                    tempe);
+                                                document.getElementById('bbbtttaaa').click();
+                                                document.getElementById("head").innerHTML =
+                                                    "Weather Report";
+                                                document.getElementById('showw').innerHTML =
+                                                    "Current Temperature : " +
+                                                    temp + "&#8451;<br> Apparent Temperature : " + tempaa +
+                                                    "&#8451;<br>Today's Summery : " + sum +
+                                                    "<br>Cloud Cover : " + tempb +
+                                                    "<br>UV Index : " + tempc + "<br>Visibility" + tempd +
+                                                    "<br> Ozone : " +
+                                                    tempe;
+
+
+                                            } else {
+                                                console.log("The city doesn't exist! Kindly check");
+                                            }
+                                        }
+                                        request.send();
+
+                                    }
+
+
+                                }
 
 
                                 if (finalTranscripts.substring(0, 4) === "about") {
