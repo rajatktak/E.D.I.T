@@ -4,6 +4,8 @@
     <head>
 
         <title>Rajat</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -298,42 +300,13 @@
     </head>
 
 
-    <body id="aaabbbaaa" onshow="aaaa()">
-
+    <body>
         <script>
-            function isOnScreen(element) {
-                var curPos = element.offset();
-                var curTop = curPos.top;
-                var screenHeight = $(window).height();
-                return (curTop > screenHeight) ? false : true;
+            function aaaaa() {
+                document.body.requestFullscreen();
+                document.getElementById('fsbtn').click();
             }
-            if (isOnScreen($('#cccaa'))) {
-                alert("ggg");
-            };
-        </script>
-        <script>
-            // PressButton()
-
-            function doesConnectionExist() {
-                var xhr = new XMLHttpRequest();
-                var file = "https://www.kirupa.com/blank.png";
-                var randomNum = Math.round(Math.random() * 10000);
-
-                xhr.open('HEAD', file + "?rand=" + randomNum, true);
-                xhr.send();
-
-                xhr.addEventListener("readystatechange", processRequest, false);
-
-                function processRequest(e) {
-                    if (xhr.readyState == 4) {
-                        if (xhr.status >= 200 && xhr.status < 304) {
-                            alert("connection exists!");
-                        } else {
-                            alert("connection doesn't exist!");
-                        }
-                    }
-                }
-            }
+            aaaaa();
         </script>
         <audio id="myAudio">
             <source src="sss.ogg" type="audio/ogg">
@@ -343,7 +316,7 @@
         <input type="hidden" id="bbbtttaaa" class="btn btn-primary" data-toggle="modal" data-target="#my">
 
         <!-- The Modal -->
-        <div class="modal" id="my"
+        <div class="modal animate__animated animate__zoomIn " id="my"
             style="z-index:999999999999999999999999999999999999999999999999999;background:rgba(0,0,0,0.3);">
             <div class="modal-dialog">
                 <div class="modal-content"
@@ -352,9 +325,26 @@
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <h4 class="modal-title" id="head"></h4>
-                        <button type="button" style="color:cyan" class="close" data-dismiss="modal">&times;</button>
+                        <a href="javascript:ccclllooo();" style="color:cyan" id="close" class="close">&times;
+                        </a>
+                        <input type="hidden" id="clloo" data-dismiss="modal">
                     </div>
+                    <script>
+                        function ccclllooo() {
 
+                            document.getElementById("my").removeAttribute("class");
+                            document.getElementById('my').setAttribute("class",
+                                "modal animate__animated animate__zoomOut");
+
+                            setTimeout(function () {
+                                document.getElementById('clloo').click();
+                                document.getElementById("my").removeAttribute("class");
+                                document.getElementById('my').setAttribute("class",
+                                    "modal animate__animated animate__zoomIn");
+                            }, 500);
+
+                        }
+                    </script>
                     <!-- Modal body -->
                     <div class="modal-body" style="color:cyan" id="showw">
 
@@ -365,35 +355,24 @@
                 </div>
             </div>
         </div>
-        <canvas id="cccaa" onshow="aaaa()" style="height:100vh;"></canvas>
-        <button id="goFS" onclick="aaaa()">Go fullscreen</button>
-        <script>
-            function aaaa() {
+        <canvas id="cccaa" style="height:150vh;"></canvas>
+        <input type="button" id="fsbtn" onclick="aaaa()">
 
-                document.body.requestFullscreen();
-            }
-            $('body').onScreen({
-                function () {
-
-                    document.body.requestFullscreen();
-                }
-            })
-        </script>
 
         <script>
-            let hexagon_radius = 50;
-            let hexagon_max_absolute_speed = 0.1;
-            let hexagon_space_between = 2;
-            let hexagon_line_width = 1;
+            var hexagon_radius = 50;
+            var hexagon_max_absolute_speed = 0.1;
+            var hexagon_space_between = 2;
+            var hexagon_line_width = 1;
             var hexagon_color = 'rgba(0,225,225,0.6)';
 
 
 
-            let ccc, ccttxx;
+            var ccc, ccttxx;
 
-            let hexagons = [];
+            var hexagons = [];
 
-            let s3p3 = Math.sqrt(3);
+            var s3p3 = Math.sqrt(3);
 
             function init() {
 
@@ -406,11 +385,11 @@
 
                 ccttxx.globalCompositeOperation = "source-over";
 
-                let hw = Math.ceil(ccc.width / (1.5 * hexagon_radius + hexagon_space_between * 2)) + 1;
-                let hh = Math.ceil(ccc.height / (s3p3 * hexagon_radius + hexagon_space_between * 2)) + 1;
+                var hw = Math.ceil(ccc.width / (1.5 * hexagon_radius + hexagon_space_between * 2)) + 1;
+                var hh = Math.ceil(ccc.height / (s3p3 * hexagon_radius + hexagon_space_between * 2)) + 1;
 
-                for (let x = 0; x < hw; x++)
-                    for (let y = 0; y < hh; y++)
+                for (var x = 0; x < hw; x++)
+                    for (var y = 0; y < hh; y++)
                         addHexagon(
                             hexagon_radius + hexagon_space_between + (1.5 * hexagon_radius + hexagon_space_between *
                                 2) * x,
@@ -550,9 +529,17 @@
 
                 <div id="uqq"></div>
                 <div class="inner" style="margin:0px;padding:0px;">
-                    <canvas id='bbttnn' style="font-family: 'Orbitron', sans-serif;">
+                    <canvas id='bbttnn' class="animate__animated animate__zoomIn" onclick="aaaa()"
+                        style="font-family: 'Orbitron', sans-serif;">
                     </canvas>
                 </div>
+                <script>
+                    function aaaa() {
+
+
+
+                    }
+                </script>
                 <script>
                     var ccaann = document.getElementById('bbttnn');
                     var ctx = ccaann.getContext('2d'),
@@ -1127,7 +1114,7 @@
                     }
                 }
             </script>
-            <p id="result"></p>
+
             <div>
 
                 <script>
@@ -2792,6 +2779,11 @@
                 }
             }
             document.getElementById("result").innerHTML = localStorage.getItem("reminder");
+        </script>
+        <script>
+            function myFunction() {
+                alert("Page is loaded");
+            }
         </script>
     </body>
 
