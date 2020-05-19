@@ -4,6 +4,15 @@
     <head>
 
         <title>Rajat</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
         <link rel="manifest" href="manifest.json">
         <link rel="shortcut icon" sizes="196x196" href="icon-196x196.png">
@@ -15,6 +24,7 @@
                 margin: 0;
                 overflow: hidden;
                 background: #000;
+                font-family: 'Audiowide', cursive;
             }
 
 
@@ -330,6 +340,31 @@
             <source src="sss.mp3" type="audio/mpeg">
 
         </audio>
+        <input type="hidden" id="bbbtttaaa" class="btn btn-primary" data-toggle="modal" data-target="#my">
+
+        <!-- The Modal -->
+        <div class="modal" id="my"
+            style="z-index:999999999999999999999999999999999999999999999999999;background:rgba(0,0,0,0.3);">
+            <div class="modal-dialog">
+                <div class="modal-content"
+                    style="background:rgba(0,0,0,0.3);border:none;color:cyan;box-shadow:4px 60px 120px rgba(0,255,255,0.3),inset 4px 40px 80px rgba(0,255,255,0.2)">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="head"></h4>
+                        <button type="button" style="color:cyan" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" style="color:cyan" id="showw">
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
         <canvas id="cccaa" onshow="aaaa()" style="height:100vh;"></canvas>
         <button id="goFS" onclick="aaaa()">Go fullscreen</button>
         <script>
@@ -837,7 +872,8 @@
 
                                                         if (bbjjstatecc[a].district == distb) {
                                                             var ooaa = bbjjstatecc[a].delta;
-                                                            alert("District " + bbjjstatecc[a].district +
+                                                            responsiveVoice.speak("District " + bbjjstatecc[a]
+                                                                .district +
                                                                 "\n State " + sttb +
                                                                 "\n Total Confirmed Cases " + bbjjstatecc[a]
                                                                 .confirmed +
@@ -850,9 +886,34 @@
                                                                 "\nToday's Recovered Cases " +
                                                                 ooaa.recovered +
 
+
                                                                 "\nToday's Deceased Cases " + ooaa.deceased
 
+
+
+
                                                             );
+
+
+                                                            document.getElementById("bbbtttaaa").click();
+                                                            document.getElementById("head").innerHTML =
+                                                                "CORONA UPDATE";
+                                                            document.getElementById("showw").innerHTML =
+                                                                "District " + bbjjstatecc[a].district +
+                                                                "<br> State " + sttb +
+                                                                "<br> Total Confirmed Cases " + bbjjstatecc[a]
+                                                                .confirmed +
+                                                                "<br> Total Active Cases " + bbjjstatecc[a]
+                                                                .active +
+                                                                "<br>Total Recovered Cases " + bbjjstatecc[a]
+                                                                .recovered +
+                                                                "<br>Today's Confirmed Cases " + ooaa
+                                                                .confirmed +
+                                                                "<br>Today's Recovered Cases " +
+                                                                ooaa.recovered +
+
+
+                                                                "<br>Today's Deceased Cases " + ooaa.deceased;
 
                                                         }
                                                     }
@@ -867,8 +928,64 @@
 
 
                                 }
+                                if (finalTranscripts.substring(0, 5) === "about") {
+                                    const worddd = finalTranscripts.slice(6);
+                                    document.getElementById("bbbtttaaa").click();
+                                    const link =
+                                        "https://api.opencagedata.com/geocode/v1/json?q=" + worddd +
+                                        "&key=b68f13abe90249db88e83a0e6057c924&pretty=1";
 
 
+                                    var request = new XMLHttpRequest();
+                                    request.open('GET', link, true);
+                                    request.onload = function () {
+                                        var obj = JSON.parse(this.response);
+                                        var objee = JSON.parse(this.response).results
+                                        if (request.status >= 200 && request.status < 400) {
+                                            var abs = [];
+                                            for (var i = 0; i <= objee.length; i++) {
+                                                var bb = obj.results[i].components._type;
+                                                var ac = `obj.results[i].components.${bb}`;
+                                                var aa = eval(ac);
+                                                var cc = obj.results[i].components.continent;
+                                                var dd = obj.results[i].components.country;
+                                                if (!aa) {
+                                                    var j = (typeof (aa) !== 'undefined' ? i : 'not found');
+                                                } else {
+                                                    var j = aa;
+                                                }
+                                                alert(j + " " + bb + " " + cc + " " + dd);
+                                            }
+
+                                            openModal();
+                                            console.log("The city isssss");
+
+
+                                        } else {
+                                            console.log("The city doesn't exist! Kindly check");
+                                        }
+                                    }
+                                    request.send();
+                                    alert("aaa");
+                                }
+
+
+
+
+
+
+
+                                if (finalTranscripts.substring(0, 4) === "about") {
+                                    const worddd = finalTranscripts.slice(6);
+                                    responsiveVoice.speak("Here is what i found on Youtube about " + worddd);
+
+                                    let linkp = ' https://www.youtube.com/results?search_query=' + worddd;
+                                    window.open(linkp, '_blank');
+
+
+
+
+                                }
 
                                 if (finalTranscripts.substring(0, 4) === "play") {
                                     const worddd = finalTranscripts.slice(4);
@@ -1139,239 +1256,7 @@
                             script: 'unlock'
                         }],
                         /* An array representing the map tiles. Each number corresponds to a key */
-                        data: [
-                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 2, 6, 6, 6, 6, 6, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 2, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 2, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 2, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 2, 7, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 2, 2, 2, 2, 4, 2, 2, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2, 2, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0,
-                                0, 0, 0, 0, 2, 4, 2, 1, 2
-                            ],
-                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2, 2, 2, 2, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 1, 1, 2, 4, 2, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 1, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
-                            ],
-                            [2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 1, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 1, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 1, 1, 2, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 1, 1, 1, 4, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 8, 1, 1, 1, 2
-                            ],
-                            [2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2,
-                                1, 1, 1,
-                                2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2
-                            ],
-                            [2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2,
-                                9, 9, 9,
-                                2, 10, 10, 10, 10, 10, 10, 1, 1, 1, 1, 1, 1, 1, 11, 2, 2, 2, 2, 4, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2, 10, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2
-                            ],
-                            [2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 1, 1, 1,
-                                1, 1, 1,
-                                2
-                            ],
-                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 2, 1,
-                                2
-                            ],
-                            [2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6, 2, 2,
-                                2, 2, 2,
-                                2, 6, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2
-                            ],
-                            [2, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2
-                            ],
-                            [2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2
-                            ],
-                            [2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
-                                2, 2, 2,
-                                2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                2, 2, 2,
-                                2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 2, 2,
-                                2, 1, 1, 1, 1, 2, 5, 5, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 2,
-                                2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                1, 1, 1,
-                                2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2
-                            ],
-                            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 1, 1,
-                                1, 1, 1,
-                                2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2
-                            ],
-                            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-                                2, 2, 2,
-                                2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
-                            ]
-                        ],
+
                         /* Default gravity of the map */
                         gravity: {
                             x: 0,
@@ -2500,6 +2385,8 @@
                 }
 
 
+
+
                 var empty = [];
                 var i = 0;
                 var gr_rrs = "";
@@ -2519,8 +2406,13 @@
 
 
                 var mm = String(new Date().getMinutes());
+                var secc = String(new Date().getSeconds());
                 var timee = String(hours + ':' + mm + mid);
+
+                var timeee = hours + ':' + mm + secc + mid;
+
                 wow();
+
 
                 function gr(wordlist, main, rrlist, different) {
 
@@ -2529,6 +2421,7 @@
                     gr_rrs = main.join(" ");
                     while (i <= gr_rrs.length) {
                         if (gr_rrs.indexOf(wordlist[i]) > -1) {
+
 
                             rr = [timee];
                             var cac = document.getElementById("bbttnn");
