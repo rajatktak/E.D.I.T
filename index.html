@@ -917,7 +917,7 @@
                                 }
                                 if (finalTranscripts.substring(0, 5) === "about") {
                                     const worddd = finalTranscripts.slice(6);
-                                    document.getElementById("bbbtttaaa").click();
+
                                     const link =
                                         "https://api.opencagedata.com/geocode/v1/json?q=" + worddd +
                                         "&key=b68f13abe90249db88e83a0e6057c924&pretty=1";
@@ -941,17 +941,41 @@
                                                 } else {
                                                     var j = aa;
                                                 }
-                                                alert(j + " " + bb + " " + cc + " " + dd);
+                                                if (j != "not found") {
+                                                    if (bb == 'city' || bb == 'state' || bb == 'country' ||
+                                                        bb ==
+                                                        'continent') {
+                                                        var alla = j + " " + bb + " " + cc + " " + dd + "<br>";
+                                                        abs[i] = alla;
+                                                        document.getElementById('head').innerHTML =
+                                                            finalTranscripts;
+
+                                                        document.getElementById('showw').innerHTML = abs.join(
+                                                            "");
+                                                    } else {
+
+                                                    }
+                                                }
                                             }
 
-                                            openModal();
-                                            console.log("The city isssss");
+                                            var dddd = document.getElementById('showw').innerHTML;
+                                            if (
+                                                dddd.length == 0) {
+                                                document.getElementById('showw').innerHTML =
+                                                    "No Data Found";
+                                            }
+
+                                            console.log(abs);
 
 
                                         } else {
                                             console.log("The city doesn't exist! Kindly check");
                                         }
                                     }
+                                    setTimeout(function () {
+                                        document.getElementById("bbbtttaaa").click();
+                                    }, 1000);
+
                                     request.send();
 
                                 }
