@@ -969,6 +969,9 @@
                                                 let time1 = obj.results[i].annotations.timezone.short_name;
                                                 let time2 = obj.results[i].annotations.timezone.offset_string;
                                                 let bound = obj.results[i].bounds.northeast.lat;
+                                                let bound1 = obj.results[i].bounds.northeast.lng;
+                                                let bound2 = obj.results[i].bounds.southwest.lat;
+                                                let bound3 = obj.results[i].bounds.southwest.lng;
                                                 let road1 = obj.results[i].annotations.roadinfo.drive_on;
                                                 let road2 = obj.results[i].annotations.roadinfo.speed_in;
                                                 let curr2 = obj.results[i].annotations.currency
@@ -1019,6 +1022,53 @@
                                                                 curr2 + "<br> Currency Subunit :  " + curr3 +
                                                                 "<br> RoadInfo<br>Drive on : " + road1 +
                                                                 " <br>Speed : " + road2 + "<br>Time zone : " +
+                                                                time + "<br>Time zone name : " +
+                                                                time1 + "<br>UTC " +
+                                                                time2 + "<br><br><br>";
+                                                        }
+
+                                                        if (bb == 'state') {
+
+                                                            var alla = "Name : " + j + "<br>Type : " + bb +
+                                                                "<br> State : " + cc +
+                                                                " <br> Statecode : " + ccc +
+                                                                " <br> Country : " +
+                                                                country + "  " + flag + "<br> Continent : " +
+                                                                continent +
+                                                                " <br> Call Code : " + callc +
+                                                                "<br>Currency : " +
+                                                                curr + " <br>Currency Symbol : " + curr1 +
+                                                                ", " +
+                                                                curr2 + "<br> Currency Subunit :  " + curr3 +
+                                                                "<br> RoadInfo<br>Drive on : " + road1 +
+                                                                " <br>Speed : " + road2 +
+                                                                "<br> Boundry - <br>" +
+                                                                "Northeast : <br>Lat " + bound + "<br>Lng " +
+                                                                bound1 + "<br>Southwest : <br>Lat " + bound2 +
+                                                                "<br>Lng " + bound3 +
+                                                                "<br>Time zone : " +
+                                                                time + "<br>Time zone name : " +
+                                                                time1 + "<br>UTC " +
+                                                                time2 + "<br><br><br>";
+                                                        }
+                                                        if (bb == 'country') {
+
+                                                            var alla = "Name : " + j + "  " + flag +
+                                                                "<br>Type : " + bb +
+                                                                "<br> Continent : " +
+                                                                continent +
+                                                                " <br> Call Code : " + callc +
+                                                                "<br>Currency : " +
+                                                                curr + " <br>Currency Symbol : " + curr1 +
+                                                                ", " +
+                                                                curr2 + "<br> Currency Subunit :  " + curr3 +
+                                                                "<br> RoadInfo<br>Drive on : " + road1 +
+                                                                " <br>Speed : " + road2 +
+                                                                "<br> Boundry - <br>" +
+                                                                "Northeast : <br>Lat " + bound + "<br>Lng " +
+                                                                bound1 + "<br>Southwest : <br>Lat " + bound2 +
+                                                                "<br>Lng " + bound3 +
+                                                                "<br>Time zone : " +
                                                                 time + "<br>Time zone name : " +
                                                                 time1 + "<br>UTC " +
                                                                 time2 + "<br><br><br>";
