@@ -4,7 +4,7 @@
     <head>
 
         <title>Rajat</title>
-
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
@@ -46,6 +46,28 @@
             /* Handle on hover */
             ::-webkit-scrollbar-thumb:hover {
                 background: cyan;
+            }
+
+            #iinnff {
+                margin: 8px;
+                padding: 5px;
+            }
+
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin: auto;
+                padding: auto;
+                box-shadow: inset 1px 10px 500px rgba(0, 255, 255, 0.3), inset 0.5px 5px 10px cyan;
+                border: 1px solid cyan;
+                z-index: 999999;
+                width: 100%;
+                height: 100%;
+            }
+
+            .img-fluid {
+                filter: grayscale(50%);
             }
 
             h1,
@@ -336,7 +358,7 @@
         <!-- The Modal -->
         <div class="modal animate__animated animate__zoomIn " id="my"
             style="z-index:999999999999999999999999999999999999999999999999999;background:rgba(0,0,0,0.3);">
-            <div class="modal-dialog">
+            <div class="modal-dialog" id="modalsize">
                 <div class="modal-content"
                     style="background:rgba(0,0,0,0.3);border:1px solid cyan;color:cyan;box-shadow:4px 60px 120px rgba(0,255,255,0.3),inset 4px 40px 80px rgba(0,255,255,0.2)">
 
@@ -547,7 +569,7 @@
 
                 <div id="uqq"></div>
                 <div class="inner" style="margin:0px;padding:0px;">
-                    <canvas id='bbttnn' class="animate__animated animate__zoomIn" onclick="aaaa()"
+                    <canvas id='bbttnn' class="animate__animated animate__zoomIn"
                         style="font-family: 'Orbitron', sans-serif;">
                     </canvas>
                 </div>
@@ -1930,6 +1952,76 @@
 
                 }
 
+
+
+
+                var empty = [];
+                var i = 0;
+                var gre_resss = "";
+                var found = false;
+                var greWords = ["who are you", "Who made you", "tell me about yorself", "do i know you",
+                    "tell me about your self",
+                    "are you edith", "who designed you", "who developed you", "who created you", "why are you here",
+                    "do you know yourself"
+                ];
+                var fivequestions = [];
+                var ress = [];
+                wow();
+
+                function gre(wordlist, main, resslist, different) {
+                    empty = [];
+                    i = 0;
+                    gre_resss = main.join(" ");
+                    while (i <= gre_resss.length) {
+                        if (gre_resss.indexOf(wordlist[i]) > -1) {
+                            document.getElementById("modalsize").removeAttribute("class");
+                            document.getElementById("modalsize").setAttribute("class", "modal-dialog modal-xl");
+                            document.getElementById('head').innerHTML = "Hi, I am E.D.I.T.H"
+                            document.getElementById('showw').innerHTML =
+                                "<div class='row'><div class='col-lg-6 col-md-12'><div class='col-lg-6 col-md-12 overlay'></div><img src='22.jpg' class='img-fluid'style='height:50vh;'></div><div id='iinnff'class='col-lg-6 col-md-12'style='text-align:justify'>I am EDITH. I am Rajat Tak's personal assistant.I can perform several task to make your day to day life easy.I can play music and video ,i can search any thing for you and many more feature. I always try to help and make things simple for humans.I can even inform you about COVID-19 status and if you wish to know anything about  any place in the world I can show you that. </div></div>";
+                            document.getElementById('bbbtttaaa').click();
+                            responsiveVoice.speak(
+                                "Hi , i am Edith . I am designed and developed by Rajat Tak . My main motive is to help humans"
+                            );
+                            if ((gre_resss[gre_resss.indexOf(wordlist[i]) - 1] == " " ||
+                                    gre_resss
+                                    .indexOf(wordlist[i]) - 1 < 0) && (gre_resss[gre_resss
+                                        .indexOf(
+                                            wordlist[i]) + wordlist[i].length] == " " || gre_resss
+                                    .indexOf((wordlist[
+                                        i]) + wordlist[i].length) < 0)) {
+
+                                if (different == 1) {
+                                    (ress[resslist + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = ress[resslist + i];
+                                    responsiveVoice.speak(ress[resslist + i]);
+                                    document.getElementById('response').innerHTML = "";
+                                    finalTranscripts = '';
+                                    ress.innerHTML = '';
+                                    document.getElementById('uq').value = '';
+                                    document.getElementById("myy").submit();
+                                } else {
+                                    (ress[resslist]);
+                                    document.getElementById('response').innerHTML = "";
+                                    document.getElementById('response').innerHTML = ress[resslist];
+                                    responsiveVoice.speak(ress[resslist]);
+                                }
+                                empty.push(main[i]);
+                                found = true;
+                                break;
+                            }
+                        }
+                        i = i + 1;
+                    }
+
+                }
+
+
+
+
+
+
                 var empty = [];
                 var i = 0;
                 var gg44_rr44s = "";
@@ -2918,6 +3010,19 @@
                 }
 
 
+                gre(greWords, userQ, 0, 0);
+                if (found == false) {
+                    i = 0;
+                    while (i < listdata.length) {
+                        if (zeta.indexOf(listdata[i]) !== -1) {
+                            (ansdata[i]);
+                            responsiveVoice.speak(ansdata[i]);
+                            found = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
                 if (found == false) {
 
                 }
