@@ -29,6 +29,24 @@
                 font-family: 'Audiowide', cursive;
             }
 
+            ::-webkit-scrollbar {
+                width: 3px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.6);
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: cyan;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: cyan;
+            }
 
             h1,
             h3,
@@ -917,7 +935,7 @@
                                 }
                                 if (finalTranscripts.substring(0, 5) === "about") {
                                     const worddd = finalTranscripts.slice(6);
-
+                                    responsiveVoice.speak("Gathering Information");
                                     const link =
                                         "https://api.opencagedata.com/geocode/v1/json?q=" + worddd +
                                         "&key=b68f13abe90249db88e83a0e6057c924&pretty=1";
@@ -930,32 +948,103 @@
                                         var objee = JSON.parse(this.response).results
                                         if (request.status >= 200 && request.status < 400) {
                                             var abs = [];
+
                                             for (var i = 0; i <= objee.length; i++) {
-                                                var bb = obj.results[i].components._type;
-                                                var ac = `obj.results[i].components.${bb}`;
-                                                var aa = eval(ac);
-                                                var cc = obj.results[i].components.continent;
-                                                var dd = obj.results[i].components.country;
+                                                let length = i;
+                                                let bb = obj.results[i].components._type;
+                                                let ac = `obj.results[i].components.${bb}`;
+                                                let aa = eval(ac);
+                                                let dis = obj.results[i].components.state_district;
+                                                let cc = obj.results[i].components.state;
+                                                let ccc = obj.results[i].components.state_code;
+                                                let continent = obj.results[i].components.continent;
+                                                let country = obj.results[i].components.country;
+                                                let dd = obj.results[i].components.country;
+                                                let callc = obj.results[i].annotations.callingcode;
+                                                let curr = obj.results[i].annotations.currency.name;
+                                                let curr1 = obj.results[i].annotations.currency.html_entity;
+                                                let curr3 = obj.results[i].annotations.currency.subunit;
+                                                let flag = obj.results[i].annotations.flag;
+                                                let time = obj.results[i].annotations.timezone.name;
+                                                let time1 = obj.results[i].annotations.timezone.short_name;
+                                                let time2 = obj.results[i].annotations.timezone.offset_string;
+                                                let bound = obj.results[i].bounds.northeast.lat;
+                                                let road1 = obj.results[i].annotations.roadinfo.drive_on;
+                                                let road2 = obj.results[i].annotations.roadinfo.speed_in;
+                                                let curr2 = obj.results[i].annotations.currency
+                                                    .alternate_symbols[0];
+
+
                                                 if (!aa) {
                                                     var j = (typeof (aa) !== 'undefined' ? i : 'not found');
                                                 } else {
                                                     var j = aa;
                                                 }
-                                                if (j != "not found") {
+                                                if (j == worddd) {
                                                     if (bb == 'city' || bb == 'state' || bb == 'country' ||
                                                         bb ==
-                                                        'continent') {
-                                                        var alla = j + " " + bb + " " + cc + " " + dd + "<br>";
-                                                        abs[i] = alla;
-                                                        document.getElementById('head').innerHTML =
-                                                            finalTranscripts;
+                                                        'continent' || bb == 'village') {
 
-                                                        document.getElementById('showw').innerHTML = abs.join(
-                                                            "");
-                                                    } else {
+                                                        if (bb == 'village') {
+
+                                                            var alla = "Name : " + j + "<br>Type : " + bb +
+                                                                "<br> State : " + cc +
+                                                                " <br> Statecode : " + ccc +
+                                                                " <br> Country : " +
+                                                                country + "  " + flag + "<br> Continent : " +
+                                                                continent +
+                                                                " <br> Call Code : " + callc +
+                                                                "<br>Currency : " +
+                                                                curr + " <br>Currency Symbol : " + curr1 +
+                                                                ", " +
+                                                                curr2 + "<br> Currency Subunit :  " + curr3 +
+                                                                "<br> RoadInfo<br>Drive on : " + road1 +
+                                                                " <br>Speed : " + road2 + "<br>Time zone : " +
+                                                                time + "<br>Time zone name : " +
+                                                                time1 + "<br>UTC " +
+                                                                time2 + "<br><br><br>";
+                                                        }
+                                                        if (bb == 'city') {
+
+                                                            var alla = "Name : " + j + "<br>Type : " + bb +
+                                                                "<br> State : " + cc +
+                                                                " <br> Statecode : " + ccc +
+                                                                " <br> Country : " +
+                                                                country + "  " + flag + "<br> Continent : " +
+                                                                continent +
+                                                                " <br> Call Code : " + callc +
+                                                                "<br>Currency : " +
+                                                                curr + " <br>Currency Symbol : " + curr1 +
+                                                                ", " +
+                                                                curr2 + "<br> Currency Subunit :  " + curr3 +
+                                                                "<br> RoadInfo<br>Drive on : " + road1 +
+                                                                " <br>Speed : " + road2 + "<br>Time zone : " +
+                                                                time + "<br>Time zone name : " +
+                                                                time1 + "<br>UTC " +
+                                                                time2 + "<br><br><br>";
+                                                        }
+                                                        //var alla = j + " " + bb + " " + cc + " " + dd + "<br>";
+
+                                                        var nnn = abs.includes(alla);
+                                                        if (!nnn) {
+                                                            abs[i] = alla;
+
+
+                                                            document.getElementById('head').innerHTML =
+                                                                finalTranscripts;
+
+                                                            document.getElementById('showw').innerHTML = abs
+                                                                .join(
+                                                                    "");
+
+                                                        }
 
                                                     }
+
+
+
                                                 }
+
                                             }
 
                                             var dddd = document.getElementById('showw').innerHTML;
@@ -965,7 +1054,8 @@
                                                     "No Data Found";
                                             }
 
-                                            console.log(abs);
+                                            console.log('yesss');
+
 
 
                                         } else {
@@ -973,8 +1063,12 @@
                                         }
                                     }
                                     setTimeout(function () {
+
+                                        responsiveVoice.speak("Showing all the information " +
+                                            finalTranscripts);
+
                                         document.getElementById("bbbtttaaa").click();
-                                    }, 1000);
+                                    }, 3000);
 
                                     request.send();
 
